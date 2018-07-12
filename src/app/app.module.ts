@@ -16,6 +16,7 @@ import { SubjectListPage } from '../pages/common/subject-list/subject-list';
 import { SubjectProvider } from '../providers/subject/subject';
 import { SubjectDetailPage } from '../pages/common/subject-detail/subject-detail';
 import { LessonProvider } from '../providers/lesson/lesson';
+import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LessonProvider } from '../providers/lesson/lesson';
     ListPage,
     StudentHomePage,
     SubjectListPage,
-    SubjectDetailPage
+    SubjectDetailPage,
+    LessonDetailPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { LessonProvider } from '../providers/lesson/lesson';
     ListPage,
     StudentHomePage,
     SubjectListPage,
-    SubjectDetailPage
+    SubjectDetailPage,
+    LessonDetailPage
   ],
   providers: [
     StatusBar,

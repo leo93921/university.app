@@ -37,12 +37,10 @@
         Lessons
       </ion-card-header>
       <ion-list>
-        <button ion-item *ngFor="let l of lessons; let index = index">
+        <button ion-item *ngFor="let l of lessons; let index = index" (click)="selectLesson(l)">
           <span class="text-bold">Lesson {{ index + 1 }}</span><br>
           <small>{{ l.timeSlot.startTime | date:'d MMM, HH:mm' }} - {{ l.timeSlot.endTime | date:'HH:mm' }}</small>
         </button>
-
-
       </ion-list>
     </ion-card>
 

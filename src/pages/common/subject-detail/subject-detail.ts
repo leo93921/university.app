@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Subject } from '../../../models/subject';
 import { Lesson } from '../../../models/lesson';
 import { LessonProvider } from '../../../providers/lesson/lesson';
+import { LessonDetailPage } from '../lesson-detail/lesson-detail';
 
 /**
  * Generated class for the SubjectDetailPage page.
@@ -33,4 +34,7 @@ export class SubjectDetailPage {
     });
   }
 
+  selectLesson(lesson: Lesson) {
+    this.navCtrl.push(LessonDetailPage, lesson);
+  }
 }

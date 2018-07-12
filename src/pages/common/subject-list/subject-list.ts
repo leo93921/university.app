@@ -4,6 +4,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { User } from '../../../models/User';
 import { Subject } from '../../../models/subject';
+import { SubjectDetailPage } from '../subject-detail/subject-detail';
 
 /**
  * Generated class for the SubjectListPage page.
@@ -38,7 +39,7 @@ export class SubjectListPage {
   }
 
   selectSubject(subject: Subject) {
-    console.log(subject);
+    this.navCtrl.push(SubjectDetailPage, subject);
   }
 
 }

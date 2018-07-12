@@ -14,6 +14,8 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { StudentHomePage } from '../pages/student/student-home/student-home';
 import { SubjectListPage } from '../pages/common/subject-list/subject-list';
 import { SubjectProvider } from '../providers/subject/subject';
+import { SubjectDetailPage } from '../pages/common/subject-detail/subject-detail';
+import { LessonProvider } from '../providers/lesson/lesson';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SubjectProvider } from '../providers/subject/subject';
     HomePage,
     ListPage,
     StudentHomePage,
-    SubjectListPage
+    SubjectListPage,
+    SubjectDetailPage
   ],
   imports: [
     BrowserModule,
@@ -35,14 +38,16 @@ import { SubjectProvider } from '../providers/subject/subject';
     HomePage,
     ListPage,
     StudentHomePage,
-    SubjectListPage
+    SubjectListPage,
+    SubjectDetailPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
-    SubjectProvider
+    SubjectProvider,
+    LessonProvider
   ]
 })
 export class AppModule {}

@@ -51,7 +51,7 @@ export class HomePage {
 
   goToPage(user: User) {
     if (user.userType === 'STUDENT') {
-      this.navCtrl.push(StudentHomePage);
+      this.navCtrl.setRoot(StudentHomePage);
     }
   }
 }

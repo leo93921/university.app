@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SubjectListPage } from '../../common/subject-list/subject-list';
 
 /**
  * Generated class for the StudentHomePage page.
@@ -16,10 +17,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class StudentHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.navCtrl.push(SubjectListPage)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StudentHomePage');
   }
 
 }

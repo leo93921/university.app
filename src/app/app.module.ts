@@ -12,13 +12,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserProvider } from '../providers/user/user';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { StudentHomePage } from '../pages/student/student-home/student-home';
+import { SubjectListPage } from '../pages/common/subject-list/subject-list';
+import { SubjectProvider } from '../providers/subject/subject';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    StudentHomePage
+    StudentHomePage,
+    SubjectListPage
   ],
   imports: [
     BrowserModule,
@@ -31,13 +34,15 @@ import { StudentHomePage } from '../pages/student/student-home/student-home';
     MyApp,
     HomePage,
     ListPage,
-    StudentHomePage
+    StudentHomePage,
+    SubjectListPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProvider
+    UserProvider,
+    SubjectProvider
   ]
 })
 export class AppModule {}

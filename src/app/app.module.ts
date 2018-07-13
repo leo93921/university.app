@@ -3,6 +3,10 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { LocalStorageModule } from '@ngx-pwa/local-storage';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { Firebase } from '@ionic-native/firebase';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -17,6 +21,15 @@ import { SubjectProvider } from '../providers/subject/subject';
 import { SubjectDetailPage } from '../pages/common/subject-detail/subject-detail';
 import { LessonProvider } from '../providers/lesson/lesson';
 import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
+import { FcmProvider } from '../providers/fcm/fcm';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
+  authDomain: "university-be.firebaseio.com",
+  databaseURL: "https://university-be.firebaseio.com",
+  storageBucket: "university-be.appspot.com",
+  messagingSenderId: '913613968475'
+};
 
 @NgModule({
   declarations: [
@@ -32,7 +45,9 @@ import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    LocalStorageModule
+    LocalStorageModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +65,9 @@ import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     SubjectProvider,
-    LessonProvider
+    LessonProvider,
+    Firebase,
+    FcmProvider
   ]
 })
 export class AppModule {}

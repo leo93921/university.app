@@ -17,6 +17,9 @@ import { SubjectProvider } from '../providers/subject/subject';
 import { SubjectDetailPage } from '../pages/common/subject-detail/subject-detail';
 import { LessonProvider } from '../providers/lesson/lesson';
 import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
+import { DocumentProvider } from '../providers/document/document';
+import { RatePage } from '../pages/student/rate/rate';
+import { EvaluationProvider } from '../providers/evaluation/evaluation';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
     StudentHomePage,
     SubjectListPage,
     SubjectDetailPage,
-    LessonDetailPage
+    LessonDetailPage,
+    RatePage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
     StudentHomePage,
     SubjectListPage,
     SubjectDetailPage,
-    LessonDetailPage
+    LessonDetailPage,
+    RatePage
   ],
   providers: [
     StatusBar,
@@ -50,7 +55,9 @@ import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     SubjectProvider,
-    LessonProvider
+    LessonProvider,
+    DocumentProvider,
+    EvaluationProvider
   ]
 })
 export class AppModule {}

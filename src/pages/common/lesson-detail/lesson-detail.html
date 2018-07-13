@@ -13,6 +13,76 @@
 </ion-header>
 
 
+
 <ion-content padding>
   
+  
+  <ion-card>
+    <ion-card-header>
+      {{lesson.subject.name}}
+    </ion-card-header>
+    <ion-card-content center>
+
+
+        <ion-grid>
+            <ion-row center>
+            
+              
+                
+                {{ lesson.timeSlot.startTime | date:'d MMM, HH:mm' }} - {{ lesson.timeSlot.endTime | date:'HH:mm' }}
+
+              
+                </ion-row><ion-row center>
+              
+                  <button ion-button  (click)="selectLesson(d)" >Rate this Lesson!</button>
+
+            
+          
+            </ion-row>
+          </ion-grid>
+
+
+
+</ion-card-content>
+  </ion-card>
+
+
+  <ion-card  *ngIf="documents.length === 0" >
+
+
+  <ion-card-content>
+      No documents avaiable for this lesson
+  </ion-card-content>
+    
+    </ion-card>
+
+    
+
+  
+    <ion-card  *ngFor="let d of documents; let index = index" >
+
+        <ion-card-header>
+            <span class="text-bold">Document {{ index + 1 }}</span>
+        </ion-card-header>
+      
+
+        <ion-card-content >
+       
+
+            {{d.name}}
+            <br>
+            {{d.note}}
+            <br>
+            Published on: {{d.publishDate | date:'d MMM, HH:mm'}}
+            <br>
+            <button ion-button (click)="downloadFile(d)">DOWNLOAD</button>
+            <br>
+            <button ion-button (click)="selectDocument(d)" >Rate this Document!</button>
+        </ion-card-content>
+      
+      </ion-card>
+
+
+
+
 </ion-content>

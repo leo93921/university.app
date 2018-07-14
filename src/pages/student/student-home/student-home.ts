@@ -6,6 +6,10 @@ import { tap } from 'rxjs/operators';
 import { LocalStorage } from '../../../../node_modules/@ngx-pwa/local-storage';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { User } from '../../../models/User';
+import { LessonFilter } from '../../../models/lesson-filter';
+import { TimeSlot } from '../../../models/time-slot';
+import { Lesson } from '../../../models/lesson';
+import { LessonProvider } from '../../../providers/lesson/lesson';
 
 /**
  * Generated class for the StudentHomePage page.
@@ -21,6 +25,9 @@ import { User } from '../../../models/User';
 })
 export class StudentHomePage {
 
+  loggedUser: User = {} as User;
+  lessons: Lesson[] = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,15 +35,19 @@ export class StudentHomePage {
     private toastController: ToastController,
     private localStorage: LocalStorage,
     private subjectProvider: SubjectProvider,
+    private lessonProvider: LessonProvider,
     private platform: Platform
   ) {
     //this.navCtrl.push(SubjectListPage)
   }
 
   ionViewDidLoad() {
-    if (this.platform.is('ios') || this.platform.is('android')) {
+    
       this.localStorage.getItem('loggedUser').subscribe((user: User) => {
 
+        this.loggedUser = user; 
+        this.selectLessons();
+        if (this.platform.is('cordova')) {
             this.fcmProvider.getToken(user).then(() => {
               // Subscribe to single notifications
               this.fcmProvider.listenToNotifications().pipe(
@@ -52,8 +63,12 @@ export class StudentHomePage {
                 })
               })
             });
+          }
       });
-    }
+    
+
+    
+
   }
 
   createToastMessage(msg) {
@@ -63,4 +78,43 @@ export class StudentHomePage {
     });
     toast.present();
   }
+
+
+
+
+
+  initFilter(): LessonFilter {
+    
+    const start: Date = new Date();
+    start.setHours(0);
+    start.setMinutes(0);
+    start.setTime(start.getTime() - (1 * 24 * 60 * 60 * 1000));
+    const end: Date = new Date();
+    end.setHours(0);
+    end.setMinutes(0);
+    end.setTime(end.getTime() + (1 * 24 * 60 * 60 * 1000));
+
+    const filter = {} as LessonFilter;
+    filter.startTime = {} as TimeSlot;
+    filter.endTime = {} as TimeSlot;
+
+    filter.startTime.startTime = start.getTime();
+    filter.endTime.endTime = end.getTime();
+
+
+    filter.courseOfStudy = this.loggedUser.courseOfStudy;
+
+    return filter;
+  }
+
+  
+  selectLessons() {
+  
+    const filter = this.initFilter();
+
+    this.lessonProvider.dailyLesson(filter).subscribe(list => {
+      this.lessons = list;
+    });
+  }
+
 }

@@ -5,6 +5,7 @@ import { UserCredentials } from '../../models/UserCredentials';
 import { StudentHomePage } from '../student/student-home/student-home';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { User } from '../../models/User';
+import { RegistrationPage } from '../student/registration/registration';
 
 @Component({
   selector: 'page-home',
@@ -53,5 +54,10 @@ export class HomePage {
     if (user.userType === 'STUDENT') {
       this.navCtrl.setRoot(StudentHomePage);
     }
+  }
+
+
+  goToRegistration(){
+    this.navCtrl.push(RegistrationPage)
   }
 }

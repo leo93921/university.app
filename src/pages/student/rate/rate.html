@@ -7,12 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title></ion-title>
+  
+    <ion-title  >Rate Document </ion-title>
+    
+   
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    
+    <input type="number" class="form-control" id="score" name="score" placeholder="5" [(ngModel)]="evaluation.score"
+      required>
+
+      <br>
+      <input type="text" class="form-control" id="note" name="note" placeholder="Your comment" [(ngModel)]="evaluation.note"
+        required>
+        <br>
+        <button ion-button (click)="saveEvaluation(evaluation)" >Send</button>
+
+   
+
+
 
 </ion-content>

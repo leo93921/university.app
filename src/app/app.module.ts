@@ -25,6 +25,9 @@ import { DocumentProvider } from '../providers/document/document';
 import { RatePage } from '../pages/student/rate/rate';
 import { EvaluationProvider } from '../providers/evaluation/evaluation';
 import { FcmProvider } from '../providers/fcm/fcm';
+import { MessageProvider } from '../providers/message/message';
+import { RegistrationPage } from '../pages/student/registration/registration';
+import { CourseOfStudyProvider } from '../providers/course-of-study/course-of-study';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
@@ -43,7 +46,8 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage
+    RatePage, 
+    RegistrationPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,8 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage
+    RatePage, 
+    RegistrationPage
   ],
   providers: [
     StatusBar,
@@ -74,7 +79,9 @@ export const firebaseConfig = {
     DocumentProvider,
     EvaluationProvider,
     Firebase,
-    FcmProvider
+    FcmProvider,
+    MessageProvider,
+    CourseOfStudyProvider
   ]
 })
 export class AppModule {}

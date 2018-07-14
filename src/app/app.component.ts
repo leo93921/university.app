@@ -9,6 +9,7 @@ import { SubjectListPage } from '../pages/common/subject-list/subject-list';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { forkJoin } from '../../node_modules/rxjs/observable/forkJoin';
 import { FcmProvider } from '../providers/fcm/fcm';
+import { ChatListPage } from '../pages/common/chat-list/chat-list';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +33,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: StudentHomePage },
-      { title: 'Subject List', component: SubjectListPage }
+      { title: 'Subject List', component: SubjectListPage },
+      { title: 'Chat', component: ChatListPage }
     ];
 
   }

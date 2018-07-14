@@ -25,6 +25,7 @@ import { DocumentProvider } from '../providers/document/document';
 import { RatePage } from '../pages/student/rate/rate';
 import { EvaluationProvider } from '../providers/evaluation/evaluation';
 import { FcmProvider } from '../providers/fcm/fcm';
+import { ChatListPage } from '../pages/common/chat-list/chat-list';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
@@ -43,7 +44,8 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage
+    RatePage,
+    ChatListPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage
+    RatePage,
+    ChatListPage
   ],
   providers: [
     StatusBar,

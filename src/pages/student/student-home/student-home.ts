@@ -34,7 +34,7 @@ export class StudentHomePage {
   }
 
   ionViewDidLoad() {
-    if (this.platform.is('ios') || this.platform.is('android')) {
+    if (this.platform.is('cordova')) {
       this.localStorage.getItem('loggedUser').subscribe((user: User) => {
 
             this.fcmProvider.getToken(user).then(() => {

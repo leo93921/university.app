@@ -56,4 +56,8 @@ export class FcmProvider {
   public subscribeToTopic(topicName: string) {
     return Observable.of(this.firebaseNative.subscribe(topicName));
   }
+
+  public logout() {
+    return Observable.of(this.firebaseNative.unregister());
+  }
 }

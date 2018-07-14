@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ChatUsersPage } from '../chat-users/chat-users';
 
 /**
  * Generated class for the ChatListPage page.
@@ -18,8 +19,8 @@ export class ChatListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatListPage');
+  openChatUsersPage() {
+    this.navCtrl.push(ChatUsersPage);
   }
 
 }

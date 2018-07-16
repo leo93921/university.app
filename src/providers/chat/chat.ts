@@ -28,7 +28,7 @@ export class ChatProvider {
     return this.db.list<any>(`public-message/${subject.id}_${subject.name}`, ref => ref.orderByChild('sendDate/time'));
   }
 
-  public getPrivateMessageList(loggedUser: User, recipient: User) {
+  public getPrivateMessageList() {
     return this.db.list('private-message/', ref => ref.orderByChild('sendDate/time'));
   }
 

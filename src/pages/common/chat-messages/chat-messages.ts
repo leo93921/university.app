@@ -46,7 +46,7 @@ export class ChatMessagesPage {
         });
       } else {
         // Private message type
-        this._chatRef = this.chatProvider.getPrivateMessageList(this.loggedUser, this.recipient);
+        this._chatRef = this.chatProvider.getPrivateMessageList();
         this._subscription = this._chatRef.snapshotChanges(['child_added'])
           .pipe(filter((actions: any[]) => {
             for (let action of actions) {

@@ -16,7 +16,7 @@
 <ion-content>
   <ion-item-group>
     <ion-item-divider color="light">Subjects</ion-item-divider>
-    <button ion-item *ngFor="let s of subjectList">
+    <button ion-item *ngFor="let s of subjectList" (click)="sendMessageToSubject(s)">
       {{ s.name }}
     </button>
     <ion-item *ngIf="subjectList.length === 0" text-center>

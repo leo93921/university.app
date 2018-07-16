@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { LocalStorage } from '../../../../node_modules/@ngx-pwa/local-storage';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { User } from '../../../models/User';
+import { ChatUsersPage } from '../../common/chat-users/chat-users';
 
 /**
  * Generated class for the StudentHomePage page.
@@ -30,7 +31,7 @@ export class StudentHomePage {
     private subjectProvider: SubjectProvider,
     private platform: Platform
   ) {
-    //this.navCtrl.push(SubjectListPage)
+    this.navCtrl.push(ChatUsersPage);
   }
 
   ionViewDidLoad() {

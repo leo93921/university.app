@@ -5,8 +5,8 @@ import { Firebase } from '@ionic-native/firebase';
 import { User } from '../../models/User';
 import { Constants } from '../../constants';
 import { FCMTokenRegistration } from '../../models/fcm-token-registration';
-import { Observable } from 'rxjs';
-
+import { Observable } from 'rxjs/Observable';
+import { from } from 'rxjs';
 
 /*
   Generated class for the FcmProvider provider.
@@ -54,10 +54,10 @@ export class FcmProvider {
   }
 
   public subscribeToTopic(topicName: string) {
-    return Observable.of(this.firebaseNative.subscribe(topicName));
+    return from(this.firebaseNative.subscribe(topicName));
   }
 
   public logout() {
-    return Observable.of(this.firebaseNative.unregister());
+    return from(this.firebaseNative.unregister());
   }
 }

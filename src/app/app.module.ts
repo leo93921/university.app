@@ -5,6 +5,7 @@ import { LocalStorageModule } from '@ngx-pwa/local-storage';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { Firebase } from '@ionic-native/firebase';
 
 import { MyApp } from './app.component';
@@ -27,13 +28,16 @@ import { EvaluationProvider } from '../providers/evaluation/evaluation';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { ChatListPage } from '../pages/common/chat-list/chat-list';
 import { ChatUsersPage } from '../pages/common/chat-users/chat-users';
+import { ChatMessagesPage } from '../pages/common/chat-messages/chat-messages';
+import { ChatProvider } from '../providers/chat/chat';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
   authDomain: "university-be.firebaseio.com",
   databaseURL: "https://university-be.firebaseio.com",
   storageBucket: "university-be.appspot.com",
-  messagingSenderId: '913613968475'
+  messagingSenderId: '913613968475',
+  projectId: "university-be"
 };
 
 @NgModule({
@@ -47,7 +51,8 @@ export const firebaseConfig = {
     LessonDetailPage,
     RatePage,
     ChatListPage,
-    ChatUsersPage
+    ChatUsersPage,
+    ChatMessagesPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ export const firebaseConfig = {
     HttpClientModule,
     LocalStorageModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,7 +74,8 @@ export const firebaseConfig = {
     LessonDetailPage,
     RatePage,
     ChatListPage,
-    ChatUsersPage
+    ChatUsersPage,
+    ChatMessagesPage
   ],
   providers: [
     StatusBar,
@@ -80,7 +87,8 @@ export const firebaseConfig = {
     DocumentProvider,
     EvaluationProvider,
     Firebase,
-    FcmProvider
+    FcmProvider,
+    ChatProvider
   ]
 })
 export class AppModule {}

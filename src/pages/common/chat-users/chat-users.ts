@@ -4,6 +4,7 @@ import { LocalStorage } from '../../../../node_modules/@ngx-pwa/local-storage';
 import { User } from '../../../models/User';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { Subject } from '../../../models/subject';
+import { ChatMessagesPage } from '../chat-messages/chat-messages';
 
 /**
  * Generated class for the ChatUsersPage page.
@@ -35,6 +36,13 @@ export class ChatUsersPage {
         this.subjectList = list;
       })
     })
+  }
+
+  sendMessageToSubject(subject: Subject) {
+    this.navCtrl.push(ChatMessagesPage, {
+      recipient: subject,
+      type: 'public-message'
+    });
   }
 
 }

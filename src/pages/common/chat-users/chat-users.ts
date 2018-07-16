@@ -5,6 +5,7 @@ import { User } from '../../../models/User';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { Subject } from '../../../models/subject';
 import { ChatMessagesPage } from '../chat-messages/chat-messages';
+import { Constants } from '../../../constants';
 
 /**
  * Generated class for the ChatUsersPage page.
@@ -41,8 +42,14 @@ export class ChatUsersPage {
   sendMessageToSubject(subject: Subject) {
     this.navCtrl.push(ChatMessagesPage, {
       recipient: subject,
-      type: 'public-message'
+      type: Constants.PUBLIC_MESSAGE_TYPE
     });
   }
 
+  sendMessageToUser(user: User) {
+    this.navCtrl.push(ChatMessagesPage,{
+      recipient: user,
+      type: Constants.PRIVATE_MESSAGE_TYPE
+    })
+  }
 }

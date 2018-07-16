@@ -65,23 +65,27 @@ export class ChatMessagesPage {
     });
   }
 
-  sendMessage(message: string) {
+  sendMessage(message) {
     if (this.type === Constants.PUBLIC_MESSAGE_TYPE) {
       const msg: PublicMessage = {} as PublicMessage;
-      msg.content = message;
+      msg.content = message.value;
       msg.recipient = this.recipient;
       msg.sendDate = new Date();
       msg.sender = this.loggedUser;
 
-      this.chatProvider.sendPublicMessage(msg).subscribe(data => {});
+      this.chatProvider.sendPublicMessage(msg).subscribe(data => {
+        message.value = '';
+      });
     } else {
       const msg: PrivateMessage = {} as PrivateMessage;
-      msg.content = message;
+      msg.content = message.value;
       msg.recipient = this.recipient;
       msg.sendDate = new Date();
       msg.sender = this.loggedUser;
 
-      this.chatProvider.sendPrivateMessage(msg).subscribe(()=>{});
+      this.chatProvider.sendPrivateMessage(msg).subscribe(()=>{
+        message.value = '';
+      });
     }
 
   }

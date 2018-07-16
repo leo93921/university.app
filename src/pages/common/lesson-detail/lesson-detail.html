@@ -34,7 +34,7 @@
               
                 </ion-row><ion-row center>
               
-                  <button ion-button  (click)="selectLesson(d)" >Rate this Lesson!</button>
+                  <button ion-button  (click)="selectLesson(lesson)" >Rate this Lesson!</button>
 
             
           
@@ -62,16 +62,13 @@
     <ion-card  *ngFor="let d of documents; let index = index" >
 
         <ion-card-header>
-            <span class="text-bold">Document {{ index + 1 }}</span>
+            <span class="text-bold">Name: {{d.name}}</span>
         </ion-card-header>
       
 
         <ion-card-content >
-       
-
-            {{d.name}}
-            <br>
-            {{d.note}}
+      
+            Description: {{d.note}}
             <br>
             Published on: {{d.publishDate | date:'d MMM, HH:mm'}}
             <br>

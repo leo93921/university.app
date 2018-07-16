@@ -45,11 +45,17 @@ export class LessonDetailPage {
   }
 
   selectDocument(document: Document) {
-    this.navCtrl.push(RatePage, document);
+    this.navCtrl.push(RatePage, {
+      body: document,
+      type: 'document'
+    });
   }
 
   selectLesson(lesson: Lesson) {
-    this.navCtrl.push(RatePage, lesson);
+    this.navCtrl.push(RatePage, {
+      body: lesson,
+      type: 'lesson'
+    });
   }
 
 }

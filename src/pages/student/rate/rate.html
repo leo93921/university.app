@@ -7,12 +7,43 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title></ion-title>
+  
+    <ion-title  >{{subjectName}} </ion-title>
+   
+   
   </ion-navbar>
+
 
 </ion-header>
 
 
 <ion-content padding>
+
+    
+  <ion-card>
+
+    <ion-card-header>
+      You are rating: 
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{secondField}} {{ dateS | date:'d MMM, HH:mm' }} - {{ dateE | date:'HH:mm' }}
+    </ion-card-content>
+  
+  </ion-card>
+
+
+    <ion-input type="number" class="form-control"  min="1" max="5" id="score" name="score" placeholder="5" [(ngModel)]="evaluation.score"
+      required></ion-input>
+
+      <br>
+      <ion-input type="text" class="form-control" id="note" name="note" placeholder="Your comment" [(ngModel)]="evaluation.note"
+        required> </ion-input>
+        <br>
+        <button ion-button (click)="saveEvaluation(evaluation)" >Send</button>
+
+   
+
+
 
 </ion-content>

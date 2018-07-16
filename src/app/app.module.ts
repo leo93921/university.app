@@ -26,6 +26,9 @@ import { DocumentProvider } from '../providers/document/document';
 import { RatePage } from '../pages/student/rate/rate';
 import { EvaluationProvider } from '../providers/evaluation/evaluation';
 import { FcmProvider } from '../providers/fcm/fcm';
+import { MessageProvider } from '../providers/message/message';
+import { RegistrationPage } from '../pages/student/registration/registration';
+import { CourseOfStudyProvider } from '../providers/course-of-study/course-of-study';
 import { ChatListPage } from '../pages/common/chat-list/chat-list';
 import { ChatUsersPage } from '../pages/common/chat-users/chat-users';
 import { ChatMessagesPage } from '../pages/common/chat-messages/chat-messages';
@@ -52,7 +55,10 @@ export const firebaseConfig = {
     RatePage,
     ChatListPage,
     ChatUsersPage,
-    ChatMessagesPage
+    ChatMessagesPage,
+    RatePage,
+    RegistrationPage,
+    ChatListPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,10 @@ export const firebaseConfig = {
     RatePage,
     ChatListPage,
     ChatUsersPage,
-    ChatMessagesPage
+    ChatMessagesPage,
+    RatePage,
+    RegistrationPage,
+    ChatListPage
   ],
   providers: [
     StatusBar,
@@ -88,7 +97,9 @@ export const firebaseConfig = {
     EvaluationProvider,
     Firebase,
     FcmProvider,
-    ChatProvider
+    ChatProvider,
+    MessageProvider,
+    CourseOfStudyProvider
   ]
 })
 export class AppModule {}

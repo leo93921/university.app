@@ -23,6 +23,10 @@ export class LessonProvider {
     return this.http.post<Lesson[]>(`${this.END_POINT}/filter`, filter);
   }
 
+  public dailyLesson(filter: LessonFilter): Observable<Lesson[]> {
+    return this.http.post<Lesson[]>(`${this.END_POINT}/daily`, filter);
+  }
+
   public getLessonsBySubject(subject: Subject): Observable<Lesson[]> {
     return this.http.post<Lesson[]>(`${this.END_POINT}/find-by-subject`, subject);
   }

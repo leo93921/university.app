@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { ChatProvider } from '../../../providers/chat/chat';
@@ -28,6 +28,7 @@ export class ChatMessagesPage {
   private _chatRef: any;
   private _subscription;
   messages: any[] = [];
+  @ViewChild('content') private content;
 
   constructor(
     public navCtrl: NavController,
@@ -63,6 +64,10 @@ export class ChatMessagesPage {
           })
       }
     });
+  }
+
+  ionViewDidEnter() {
+    this.content.scrollToBottom(300);
   }
 
   sendMessage(message) {

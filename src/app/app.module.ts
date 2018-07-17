@@ -29,6 +29,7 @@ import { MessageProvider } from '../providers/message/message';
 import { RegistrationPage } from '../pages/student/registration/registration';
 import { CourseOfStudyProvider } from '../providers/course-of-study/course-of-study';
 import { ChatListPage } from '../pages/common/chat-list/chat-list';
+import { DailyLessonComponent } from '../components/daily-lesson/daily-lesson';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
@@ -49,7 +50,8 @@ export const firebaseConfig = {
     LessonDetailPage,
     RatePage, 
     RegistrationPage,
-    ChatListPage
+    ChatListPage,
+    DailyLessonComponent
   ],
   imports: [
     BrowserModule,

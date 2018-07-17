@@ -5,7 +5,6 @@ import { tap } from 'rxjs/operators';
 import { LocalStorage } from '../../../../node_modules/@ngx-pwa/local-storage';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { User } from '../../../models/User';
-import { ChatUsersPage } from '../../common/chat-users/chat-users';
 import { LessonFilter } from '../../../models/lesson-filter';
 import { TimeSlot } from '../../../models/time-slot';
 import { Lesson } from '../../../models/lesson';
@@ -23,7 +22,7 @@ import { LessonProvider } from '../../../providers/lesson/lesson';
   templateUrl: 'professor-home.html',
 })
 export class ProfessorHomePage {
-  
+
   loggedUser: User = {} as User;
   lessons: Lesson[] = [];
 
@@ -40,11 +39,34 @@ export class ProfessorHomePage {
     this.localStorage.getItem('loggedUser').subscribe((user: User) => {
       this.loggedUser = user;
       this.selectLessons();
-  
-    });
 
+      if (this.platform.is('cordova')) {
+          this.fcmProvider.getToken(user).then(() => {
+            // Subscribe to single notifications
+            this.fcmProvider.listenToNotifications().pipe(
+              tap(msg => this.createToastMessage(msg))
+            ).subscribe();
+
+            // Subscribe to all topics for each course of study
+            this.subjectProvider.getByProfessor(this.loggedUser).subscribe(list => {
+              list.forEach(cs => {
+                this.fcmProvider.subscribeToTopic(cs.name.replace(' ', '')).pipe(
+                  tap(msg => this.createToastMessage(msg))
+                ).subscribe();
+              })
+            })
+          });
+        }
+    });
   }
 
+  createToastMessage(msg) {
+    const toast = this.toastController.create({
+      message: msg.body,
+      duration: 3000
+    });
+    toast.present();
+  }
 
   initFilter(): LessonFilter {
     const start: Date = new Date();

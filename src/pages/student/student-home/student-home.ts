@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { LocalStorage } from '../../../../node_modules/@ngx-pwa/local-storage';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { User } from '../../../models/User';
+import { ChatUsersPage } from '../../common/chat-users/chat-users';
 import { LessonFilter } from '../../../models/lesson-filter';
 import { TimeSlot } from '../../../models/time-slot';
 import { Lesson } from '../../../models/lesson';
@@ -38,14 +39,12 @@ export class StudentHomePage {
     private lessonProvider: LessonProvider,
     private platform: Platform
   ) {
-    //this.navCtrl.push(SubjectListPage)
+    this.navCtrl.push(ChatUsersPage);
   }
 
   ionViewDidLoad() {
-    
       this.localStorage.getItem('loggedUser').subscribe((user: User) => {
-
-        this.loggedUser = user; 
+        this.loggedUser = user;
         this.selectLessons();
         if (this.platform.is('cordova')) {
             this.fcmProvider.getToken(user).then(() => {
@@ -65,10 +64,6 @@ export class StudentHomePage {
             });
           }
       });
-    
-
-    
-
   }
 
   createToastMessage(msg) {
@@ -79,16 +74,12 @@ export class StudentHomePage {
     toast.present();
   }
 
-
-
-
-
   initFilter(): LessonFilter {
-    
     const start: Date = new Date();
     start.setHours(0);
     start.setMinutes(0);
     start.setTime(start.getTime() - (1 * 24 * 60 * 60 * 1000));
+
     const end: Date = new Date();
     end.setHours(0);
     end.setMinutes(0);
@@ -97,21 +88,14 @@ export class StudentHomePage {
     const filter = {} as LessonFilter;
     filter.startTime = {} as TimeSlot;
     filter.endTime = {} as TimeSlot;
-
     filter.startTime.startTime = start.getTime();
     filter.endTime.endTime = end.getTime();
-
-
     filter.courseOfStudy = this.loggedUser.courseOfStudy;
-
     return filter;
   }
 
-  
   selectLessons() {
-  
     const filter = this.initFilter();
-
     this.lessonProvider.dailyLesson(filter).subscribe(list => {
       this.lessons = list;
     });

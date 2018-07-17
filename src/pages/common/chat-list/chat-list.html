@@ -7,15 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ChatList</ion-title>
+    <ion-title>Chat</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-item-group>
+    <ion-item-divider color="light">Private messages</ion-item-divider>
+    <button ion-item *ngFor="let group of arrayOfGroups" (click)="openChatMessage(group)">
+      <h2>{{ group.senderID === loggedUser.id ? group.recipientFullName : group.senderFullName }}</h2>
+      <p>{{ group.content }} - {{ group.sendDate.time | date:'medium' }}</p>
+    </button>
+  </ion-item-group>
+
   <ion-fab bottom right>
-    <button ion-fab>
+    <button ion-fab (click)="openChatUsersPage()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

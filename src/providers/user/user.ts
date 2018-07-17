@@ -25,4 +25,8 @@ export class UserProvider {
   public registerUser(userWithPassword: User): Observable<User> {
     return this.http.post<User>(`${this.END_POINT}/register`, userWithPassword);
   }
+
+  public getUserByID(userID: number): Observable<User> {
+    return this.http.get<User>(`${this.END_POINT}/${userID}`);
+  }
 }

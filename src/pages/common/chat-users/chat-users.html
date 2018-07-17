@@ -1,0 +1,38 @@
+<!--
+  Generated template for the ChatUsersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ChatUsers</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">Subjects</ion-item-divider>
+    <button ion-item *ngFor="let s of subjectList" (click)="sendMessageToSubject(s)">
+      {{ s.name }}
+    </button>
+    <ion-item *ngIf="subjectList.length === 0" text-center>
+      <small>No subjects found.</small>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Professors</ion-item-divider>
+    <button ion-item *ngFor="let s of subjectList" (click)="sendMessageToUser(s.professor)">
+      {{ s.professor.name }} {{ s.professor.surname }}
+    </button>
+    <ion-item *ngIf="subjectList.length === 0" text-center>
+      <small>No professors found.</small>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Students</ion-item-divider>
+  </ion-item-group>
+</ion-content>

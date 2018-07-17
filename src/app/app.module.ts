@@ -5,6 +5,7 @@ import { LocalStorageModule } from '@ngx-pwa/local-storage';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { Firebase } from '@ionic-native/firebase';
 
 import { MyApp } from './app.component';
@@ -30,13 +31,17 @@ import { RegistrationPage } from '../pages/student/registration/registration';
 import { CourseOfStudyProvider } from '../providers/course-of-study/course-of-study';
 import { ChatListPage } from '../pages/common/chat-list/chat-list';
 import { DailyLessonComponent } from '../components/daily-lesson/daily-lesson';
+import { ChatUsersPage } from '../pages/common/chat-users/chat-users';
+import { ChatMessagesPage } from '../pages/common/chat-messages/chat-messages';
+import { ChatProvider } from '../providers/chat/chat';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
   authDomain: "university-be.firebaseio.com",
   databaseURL: "https://university-be.firebaseio.com",
   storageBucket: "university-be.appspot.com",
-  messagingSenderId: '913613968475'
+  messagingSenderId: '913613968475',
+  projectId: "university-be"
 };
 
 @NgModule({
@@ -48,7 +53,11 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage, 
+    RatePage,
+    ChatListPage,
+    ChatUsersPage,
+    ChatMessagesPage,
+    RatePage,
     RegistrationPage,
     ChatListPage,
     DailyLessonComponent
@@ -59,7 +68,8 @@ export const firebaseConfig = {
     HttpClientModule,
     LocalStorageModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -70,7 +80,11 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage, 
+    RatePage,
+    ChatListPage,
+    ChatUsersPage,
+    ChatMessagesPage,
+    RatePage,
     RegistrationPage,
     ChatListPage
   ],
@@ -85,6 +99,7 @@ export const firebaseConfig = {
     EvaluationProvider,
     Firebase,
     FcmProvider,
+    ChatProvider,
     MessageProvider,
     CourseOfStudyProvider
   ]

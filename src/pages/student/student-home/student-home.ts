@@ -11,6 +11,7 @@ import { LessonFilter } from '../../../models/lesson-filter';
 import { TimeSlot } from '../../../models/time-slot';
 import { Lesson } from '../../../models/lesson';
 import { LessonProvider } from '../../../providers/lesson/lesson';
+import { ChatListPage } from '../../common/chat-list/chat-list';
 
 /**
  * Generated class for the StudentHomePage page.
@@ -39,7 +40,7 @@ export class StudentHomePage {
     private lessonProvider: LessonProvider,
     private platform: Platform
   ) {
-    this.navCtrl.push(ChatUsersPage);
+    this.navCtrl.push(ChatListPage);
   }
 
   ionViewDidLoad() {

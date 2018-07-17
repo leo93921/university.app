@@ -16,8 +16,16 @@
 <ion-content>
 
   <ion-item-group>
+    <ion-item-divider color="light">Public groups</ion-item-divider>
+    <button ion-item *ngFor="let group of arrayOfPublicGroups" (click)="openPublicChatGroup(group)">
+      <h2>{{ this.subjectList.get(group.recipientID).name }}</h2>
+      <p>{{ group.content }} - {{ group.sendDate.time | date:'medium' }}</p>
+    </button>
+  </ion-item-group>
+
+  <ion-item-group>
     <ion-item-divider color="light">Private messages</ion-item-divider>
-    <button ion-item *ngFor="let group of arrayOfGroups" (click)="openChatMessage(group)">
+    <button ion-item *ngFor="let group of arrayOfPrivateGroups" (click)="openChatMessage(group)">
       <h2>{{ group.senderID === loggedUser.id ? group.recipientFullName : group.senderFullName }}</h2>
       <p>{{ group.content }} - {{ group.sendDate.time | date:'medium' }}</p>
     </button>

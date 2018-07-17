@@ -6,7 +6,6 @@ import { Constants } from '../../constants';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from '../../models/subject';
 import { PrivateMessage } from '../../models/private-message';
-import { User } from '../../models/User';
 
 /*
   Generated class for the ChatProvider provider.
@@ -26,6 +25,10 @@ export class ChatProvider {
 
   public getPublicMessageList(subject: Subject) {
     return this.db.list<any>(`public-message/${subject.id}_${subject.name}`, ref => ref.orderByChild('sendDate/time'));
+  }
+
+  public getAllPublicGroups() {
+    return this.db.list<any>(`public-message/`, ref => ref.orderByChild('sendDate/time'));
   }
 
   public getPrivateMessageList() {

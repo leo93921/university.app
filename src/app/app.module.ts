@@ -17,6 +17,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserProvider } from '../providers/user/user';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { StudentHomePage } from '../pages/student/student-home/student-home';
+import { ProfessorHomePage } from '../pages/professor/professor-home/professor-home';
 import { SubjectListPage } from '../pages/common/subject-list/subject-list';
 import { SubjectProvider } from '../providers/subject/subject';
 import { SubjectDetailPage } from '../pages/common/subject-detail/subject-detail';
@@ -34,6 +35,8 @@ import { DailyLessonComponent } from '../components/daily-lesson/daily-lesson';
 import { ChatUsersPage } from '../pages/common/chat-users/chat-users';
 import { ChatMessagesPage } from '../pages/common/chat-messages/chat-messages';
 import { ChatProvider } from '../providers/chat/chat';
+import { ExamProvider } from '../providers/exam/exam';
+import { DailyExamComponent } from '../components/daily-exam/daily-exam';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
@@ -50,6 +53,7 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     StudentHomePage,
+    ProfessorHomePage,
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
@@ -60,7 +64,8 @@ export const firebaseConfig = {
     RatePage,
     RegistrationPage,
     ChatListPage,
-    DailyLessonComponent
+    DailyLessonComponent,
+    DailyExamComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +82,7 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     StudentHomePage,
+    ProfessorHomePage,
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
@@ -101,7 +107,8 @@ export const firebaseConfig = {
     FcmProvider,
     ChatProvider,
     MessageProvider,
-    CourseOfStudyProvider
+    CourseOfStudyProvider,
+    ExamProvider
   ]
 })
 export class AppModule {}

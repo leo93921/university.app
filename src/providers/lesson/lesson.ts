@@ -26,6 +26,9 @@ export class LessonProvider {
   public dailyLesson(filter: LessonFilter): Observable<Lesson[]> {
     return this.http.post<Lesson[]>(`${this.END_POINT}/daily`, filter);
   }
+  public dailyLessonProfessor(filter: LessonFilter): Observable<Lesson[]> {
+    return this.http.post<Lesson[]>(`${this.END_POINT}/daily-professor`, filter);
+  }
 
   public getLessonsBySubject(subject: Subject): Observable<Lesson[]> {
     return this.http.post<Lesson[]>(`${this.END_POINT}/find-by-subject`, subject);

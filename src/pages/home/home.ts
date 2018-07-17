@@ -3,6 +3,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { UserCredentials } from '../../models/UserCredentials';
 import { StudentHomePage } from '../student/student-home/student-home';
+import { ProfessorHomePage } from '../professor/professor-home/professor-home';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { User } from '../../models/User';
 import { RegistrationPage } from '../student/registration/registration';
@@ -54,6 +55,11 @@ export class HomePage {
     if (user.userType === 'STUDENT') {
       this.navCtrl.setRoot(StudentHomePage);
     }
+
+    if (user.userType === 'PROFESSOR') {
+      this.navCtrl.setRoot(ProfessorHomePage);
+    }
+
   }
 
 

@@ -10,7 +10,7 @@ import { Constants } from '../../../constants';
 import { UserProvider } from '../../../providers/user/user';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { Subject } from '../../../models/subject';
-import { forkJoin, Observable } from '../../../../node_modules/rxjs';
+import { Observable } from '../../../../node_modules/rxjs';
 
 @IonicPage()
 @Component({

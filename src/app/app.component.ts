@@ -10,7 +10,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 import { forkJoin } from '../../node_modules/rxjs/observable/forkJoin';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { ChatListPage } from '../pages/common/chat-list/chat-list';
-
+import { of } from 'rxjs';
 
 @Component({
   templateUrl: 'app.html'

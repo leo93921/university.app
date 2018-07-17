@@ -17,6 +17,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserProvider } from '../providers/user/user';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { StudentHomePage } from '../pages/student/student-home/student-home';
+import { ProfessorHomePage } from '../pages/professor/professor-home/professor-home';
 import { SubjectListPage } from '../pages/common/subject-list/subject-list';
 import { SubjectProvider } from '../providers/subject/subject';
 import { SubjectDetailPage } from '../pages/common/subject-detail/subject-detail';
@@ -50,6 +51,7 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     StudentHomePage,
+    ProfessorHomePage,
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
@@ -77,6 +79,7 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     StudentHomePage,
+    ProfessorHomePage,
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,

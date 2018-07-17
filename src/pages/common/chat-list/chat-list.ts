@@ -10,6 +10,7 @@ import { Constants } from '../../../constants';
 import { UserProvider } from '../../../providers/user/user';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { Subject } from '../../../models/subject';
+import { forkJoin, Observable } from '../../../../node_modules/rxjs';
 
 @IonicPage()
 @Component({
@@ -24,6 +25,7 @@ export class ChatListPage {
   private publicMessageGroups = new Map([]);
   arrayOfPublicGroups = [];
   subjectList: Map<number, Subject> = new Map();
+  private subjectsSubscription;
 
   constructor(
     public navCtrl: NavController,
@@ -69,7 +71,13 @@ export class ChatListPage {
           }));
 
         // Public messages
-        this.subjectProvider.getAllByCourseOfStudy(this.loggedUser.courseOfStudy).subscribe(list => {
+        let subjSubObject: Observable<Subject[]>;
+        if (this.loggedUser.userType === Constants.PROFESSOR_TYPE) {
+          subjSubObject = this.subjectProvider.getByProfessor(this.loggedUser)
+        } else {
+          subjSubObject = this.subjectProvider.getAllByCourseOfStudy(this.loggedUser.courseOfStudy)
+        }
+        this.subjectsSubscription = subjSubObject.subscribe(list => {
           list.forEach(subject => {
             this.subjectList.set(subject.id, subject);
           });
@@ -134,5 +142,6 @@ export class ChatListPage {
     for (let subscription of this._subscriptions) {
       subscription.unsubscribe();
     }
+    this.subjectsSubscription.unsubscribe();
   }
 }

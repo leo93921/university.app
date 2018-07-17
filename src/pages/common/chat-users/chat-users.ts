@@ -7,6 +7,8 @@ import { Subject } from '../../../models/subject';
 import { ChatMessagesPage } from '../chat-messages/chat-messages';
 import { Constants } from '../../../constants';
 import { UserProvider } from '../../../providers/user/user';
+import { Observable, concat } from 'rxjs';
+import { first, take } from 'rxjs/operators';
 
 @IonicPage()
 @Component({
@@ -17,6 +19,8 @@ export class ChatUsersPage {
 
   subjectList: Subject[] = [];
   students: User[] = [];
+  subjectSubscription: any;
+
 
   constructor(
     public navCtrl: NavController,
@@ -29,12 +33,39 @@ export class ChatUsersPage {
 
   ionViewDidLoad() {
     this.localStorage.getItem('loggedUser').subscribe((user: User) => {
-      this.subjectProvider.getAllByCourseOfStudy(user.courseOfStudy).subscribe(list => {
+      let subjSubObject: Observable<Subject[]>;
+      if (user.userType === Constants.PROFESSOR_TYPE) {
+        subjSubObject = this.subjectProvider.getByProfessor(user);
+      } else {
+        subjSubObject = this.subjectProvider.getAllByCourseOfStudy(user.courseOfStudy);
+      }
+      this.subjectSubscription = subjSubObject.pipe(first()).subscribe(list => {
         this.subjectList = list;
+        const studentsMap: Map<number, User> = new Map();
+        const subs = [];
+        if (user.userType === Constants.PROFESSOR_TYPE) {
+          // Create unique observable (don't subscribe to a lot of obsersable, just to one)
+          this.subjectList.forEach(subject => {
+            subs.push(this.userProvider.getStudentsByCourseOfStudy(subject.courseOfStudy).pipe(take(1)));
+          });
+          // Take a list of all different students (ignore duplicated ones)
+          concat(...subs).subscribe({
+            next: (studentList: User[]) => {
+              for (let s of studentList) {
+                if (!studentsMap.has(s.id)) {
+                  studentsMap.set(s.id, s);
+                }
+              }
+            },
+            complete: () => {this.students = Array.from(studentsMap.values())}
+          })
+        }
       });
-      this.userProvider.getStudentsByCourseOfStudy(user.courseOfStudy).subscribe(list => {
-        this.students = list;
-      });
+      if (user.userType !== Constants.PROFESSOR_TYPE) {
+        this.userProvider.getStudentsByCourseOfStudy(user.courseOfStudy).subscribe(list => {
+          this.students = list;
+        });
+      }
     })
   }
 

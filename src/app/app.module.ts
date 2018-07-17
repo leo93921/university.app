@@ -30,6 +30,7 @@ import { MessageProvider } from '../providers/message/message';
 import { RegistrationPage } from '../pages/student/registration/registration';
 import { CourseOfStudyProvider } from '../providers/course-of-study/course-of-study';
 import { ChatListPage } from '../pages/common/chat-list/chat-list';
+import { DailyLessonComponent } from '../components/daily-lesson/daily-lesson';
 import { ChatUsersPage } from '../pages/common/chat-users/chat-users';
 import { ChatMessagesPage } from '../pages/common/chat-messages/chat-messages';
 import { ChatProvider } from '../providers/chat/chat';
@@ -58,7 +59,8 @@ export const firebaseConfig = {
     ChatMessagesPage,
     RatePage,
     RegistrationPage,
-    ChatListPage
+    ChatListPage,
+    DailyLessonComponent
   ],
   imports: [
     BrowserModule,

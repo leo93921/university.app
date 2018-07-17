@@ -4,13 +4,8 @@ import { User } from '../../models/User';
 import { UserCredentials } from '../../models/UserCredentials';
 import { Observable } from '../../../node_modules/rxjs/Observable';
 import { Constants } from '../../constants';
+import { CourseOfStudy } from '../../models/course-of-study';
 
-/*
-  Generated class for the UserProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
 
@@ -28,5 +23,9 @@ export class UserProvider {
 
   public getUserByID(userID: number): Observable<User> {
     return this.http.get<User>(`${this.END_POINT}/${userID}`);
+  }
+
+  public getStudentsByCourseOfStudy(courseOfStudy: CourseOfStudy): Observable<User[]> {
+    return this.http.post<User[]>(`${this.END_POINT}/get-students`, courseOfStudy);
   }
 }

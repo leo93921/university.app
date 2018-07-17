@@ -34,5 +34,11 @@
   </ion-item-group>
   <ion-item-group>
     <ion-item-divider color="light">Students</ion-item-divider>
+    <button ion-item *ngFor="let s of students" (click)="sendMessageToUser(s)">
+      {{ s.name }} {{ s.surname }}
+    </button>
+    <ion-item *ngIf="students.length === 0" text-center>
+      <small>No students found.</small>
+    </ion-item>
   </ion-item-group>
 </ion-content>

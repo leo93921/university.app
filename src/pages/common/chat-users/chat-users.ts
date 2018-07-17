@@ -6,13 +6,7 @@ import { SubjectProvider } from '../../../providers/subject/subject';
 import { Subject } from '../../../models/subject';
 import { ChatMessagesPage } from '../chat-messages/chat-messages';
 import { Constants } from '../../../constants';
-
-/**
- * Generated class for the ChatUsersPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { UserProvider } from '../../../providers/user/user';
 
 @IonicPage()
 @Component({
@@ -22,12 +16,14 @@ import { Constants } from '../../../constants';
 export class ChatUsersPage {
 
   subjectList: Subject[] = [];
+  students: User[] = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private localStorage: LocalStorage,
-    private subjectProvider: SubjectProvider
+    private subjectProvider: SubjectProvider,
+    private userProvider: UserProvider
   ) {
   }
 
@@ -35,7 +31,10 @@ export class ChatUsersPage {
     this.localStorage.getItem('loggedUser').subscribe((user: User) => {
       this.subjectProvider.getAllByCourseOfStudy(user.courseOfStudy).subscribe(list => {
         this.subjectList = list;
-      })
+      });
+      this.userProvider.getStudentsByCourseOfStudy(user.courseOfStudy).subscribe(list => {
+        this.students = list;
+      });
     })
   }
 

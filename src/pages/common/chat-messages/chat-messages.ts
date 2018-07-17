@@ -6,14 +6,7 @@ import { PublicMessage } from '../../../models/public-message';
 import { User } from '../../../models/User';
 import { Constants } from '../../../constants';
 import { PrivateMessage } from '../../../models/private-message';
-import { filter } from '../../../../node_modules/rxjs/operators';
-
-/**
- * Generated class for the ChatMessagesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { map } from '../../../../node_modules/rxjs/operators';
 
 @IonicPage()
 @Component({
@@ -49,18 +42,20 @@ export class ChatMessagesPage {
         // Private message type
         this._chatRef = this.chatProvider.getPrivateMessageList();
         this._subscription = this._chatRef.snapshotChanges(['child_added'])
-          .pipe(filter((actions: any[]) => {
-            for (let action of actions) {
+          .pipe(map((actions: any[]) => {
+            const filtered = actions.filter((action => {
               const msg = action.payload.val();
               return (msg.senderID === this.loggedUser.id && msg.recipientID === this.recipient.id) ||
                 (msg.senderID === this.recipient.id && msg.recipientID === this.loggedUser.id);
-            }
+            }))
+            return filtered;
           }))
-          .subscribe((actions: any[]) => {
+          .subscribe(actions => {
             this.messages = [];
             actions.forEach(action => {
               this.messages.push(action.payload.val());
-            })
+            });
+            this.content.scrollToBottom(300);
           })
       }
     });

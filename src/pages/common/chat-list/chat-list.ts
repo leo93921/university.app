@@ -4,19 +4,12 @@ import { ChatUsersPage } from '../chat-users/chat-users';
 import { ChatProvider } from '../../../providers/chat/chat';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { User } from '../../../models/User';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ChatMessagesPage } from '../chat-messages/chat-messages';
 import { Constants } from '../../../constants';
 import { UserProvider } from '../../../providers/user/user';
 import { SubjectProvider } from '../../../providers/subject/subject';
 import { Subject } from '../../../models/subject';
-
-/**
- * Generated class for the ChatListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -47,11 +40,12 @@ export class ChatListPage {
       // Private message type
       this._subscriptions.push(
         this.chatProvider.getPrivateMessageList().snapshotChanges(['child_added'])
-          .pipe(filter((actions: any[]) => {
-            for (let action of actions) {
+          .pipe(map((actions: any[]) => {
+            const filtered = actions.filter(action => {
               const msg = action.payload.val();
               return (msg.senderID === this.loggedUser.id) || (msg.recipientID === this.loggedUser.id);
-            }
+            });
+            return filtered;
           }))
           .subscribe((actions: any[]) => {
             this.privateMessageGroups = new Map([]);

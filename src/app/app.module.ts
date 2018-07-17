@@ -35,6 +35,8 @@ import { DailyLessonComponent } from '../components/daily-lesson/daily-lesson';
 import { ChatUsersPage } from '../pages/common/chat-users/chat-users';
 import { ChatMessagesPage } from '../pages/common/chat-messages/chat-messages';
 import { ChatProvider } from '../providers/chat/chat';
+import { ExamProvider } from '../providers/exam/exam';
+import { DailyExamComponent } from '../components/daily-exam/daily-exam';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
@@ -62,7 +64,8 @@ export const firebaseConfig = {
     RatePage,
     RegistrationPage,
     ChatListPage,
-    DailyLessonComponent
+    DailyLessonComponent,
+    DailyExamComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +107,8 @@ export const firebaseConfig = {
     FcmProvider,
     ChatProvider,
     MessageProvider,
-    CourseOfStudyProvider
+    CourseOfStudyProvider,
+    ExamProvider
   ]
 })
 export class AppModule {}

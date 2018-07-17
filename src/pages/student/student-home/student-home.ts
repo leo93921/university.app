@@ -8,9 +8,12 @@ import { SubjectProvider } from '../../../providers/subject/subject';
 import { User } from '../../../models/User';
 import { ChatUsersPage } from '../../common/chat-users/chat-users';
 import { LessonFilter } from '../../../models/lesson-filter';
+import { ExamFilter } from '../../../models/exam-filter';
 import { TimeSlot } from '../../../models/time-slot';
 import { Lesson } from '../../../models/lesson';
+import { Exam } from '../../../models/exam';
 import { LessonProvider } from '../../../providers/lesson/lesson';
+import { ExamProvider } from '../../../providers/exam/exam';
 import { ChatListPage } from '../../common/chat-list/chat-list';
 
 /**
@@ -29,6 +32,7 @@ export class StudentHomePage {
 
   loggedUser: User = {} as User;
   lessons: Lesson[] = [];
+  exams: Exam[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +41,7 @@ export class StudentHomePage {
     private toastController: ToastController,
     private localStorage: LocalStorage,
     private subjectProvider: SubjectProvider,
+    private examProvider: ExamProvider,
     private lessonProvider: LessonProvider,
     private platform: Platform
   ) {
@@ -47,6 +52,7 @@ export class StudentHomePage {
       this.localStorage.getItem('loggedUser').subscribe((user: User) => {
         this.loggedUser = user;
         this.selectLessons();
+        this.selectExams();
         if (this.platform.is('cordova')) {
             this.fcmProvider.getToken(user).then(() => {
               // Subscribe to single notifications
@@ -75,7 +81,7 @@ export class StudentHomePage {
     toast.present();
   }
 
-  initFilter(): LessonFilter {
+  initLessonFilter(): LessonFilter {
     const start: Date = new Date();
     start.setHours(0);
     start.setMinutes(0);
@@ -95,8 +101,36 @@ export class StudentHomePage {
     return filter;
   }
 
+  initExamFilter(): ExamFilter {
+    const start: Date = new Date();
+    start.setHours(0);
+    start.setMinutes(0);
+    start.setTime(start.getTime() - (1 * 24 * 60 * 60 * 1000));
+
+    const end: Date = new Date();
+    end.setHours(0);
+    end.setMinutes(0);
+    end.setTime(end.getTime() + (1 * 24 * 60 * 60 * 1000));
+
+    const filter = {} as ExamFilter;
+    filter.startTime = {} as TimeSlot;
+    filter.endTime = {} as TimeSlot;
+    filter.startTime.startTime = start.getTime();
+    filter.endTime.endTime = end.getTime();
+    filter.courseOfStudy = this.loggedUser.courseOfStudy;
+    return filter;
+  }
+
+  selectExams() {
+    const filter = this.initExamFilter();
+    this.examProvider.dailyExam(filter).subscribe(list => {
+      this.exams = list;
+    });
+  }
+
+
   selectLessons() {
-    const filter = this.initFilter();
+    const filter = this.initLessonFilter();
     this.lessonProvider.dailyLesson(filter).subscribe(list => {
       this.lessons = list;
     });

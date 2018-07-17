@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from '../../constants';
-import { LessonFilter } from '../../models/lesson-filter';
 import { Observable } from 'rxjs/Observable';
-import { Lesson } from '../../models/lesson';
-import { Subject } from '../../models/subject';
 import { CourseOfStudy } from '../../models/course-of-study';
 
 /*
@@ -17,9 +14,7 @@ import { CourseOfStudy } from '../../models/course-of-study';
 export class CourseOfStudyProvider {
   private END_POINT = `${Constants.BASE_URL}/course-of-study`;
 
-  constructor(public http: HttpClient) {
-    console.log('Hello CourseOfStudyProvider Provider');
-  }
+  constructor(public http: HttpClient) { }
 
   save(courseOfStudy: CourseOfStudy): Observable<CourseOfStudy> {
     return this.http.post<CourseOfStudy>(`${this.END_POINT}`, courseOfStudy);

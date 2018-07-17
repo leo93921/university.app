@@ -1,24 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from '../../constants';
-import { LessonFilter } from '../../models/lesson-filter';
 import { Observable } from 'rxjs/Observable';
 import { Lesson } from '../../models/lesson';
-import { Subject } from '../../models/subject';
 import { Document } from '../../models/document';
-/*
-  Generated class for the DocumentProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class DocumentProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello DocumentProvider Provider');
-  
-  }
+  constructor(public http: HttpClient) { }
 
   private END_POINT = `${Constants.BASE_URL}/document`;
 

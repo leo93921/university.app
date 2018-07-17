@@ -1,17 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Lesson } from '../../../models/lesson';
-import { LessonProvider } from '../../../providers/lesson/lesson';
 import { DocumentProvider } from '../../../providers/document/document';
 import { Document } from '../../../models/document';
 import { HttpResponse } from '@angular/common/http';
 import { RatePage } from '../../student/rate/rate';
-/**
- * Generated class for the LessonDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

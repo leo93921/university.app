@@ -33,18 +33,30 @@
 <br><br>
       <form novalidate>
      Course of study
-     <!--
-            <ion-select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
+   
+           <!-- <ion-select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
               required [(ngModel)]="selectedCOS_ID">
               <ion-option selected disabled [value]="null">Select a Course of study</ion-option>
               <ion-option *ngFor="let cos of coursesOfStudy" [value]="cos.id">{{ cos.name }}</ion-option>
-            </ion-select>
-          -->
-          <select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
+            </ion-select>-->
+
+
+            <ion-list>
+              <ion-item>
+                
+                <ion-select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
+                required [(ngModel)]="selectedCOS_ID">
+                <ion-option selected disabled [value]="null">Select a Course of study</ion-option>
+                <ion-option *ngFor="let cos of coursesOfStudy" [value]="cos.id">{{ cos.name }}</ion-option>
+              </ion-select>
+              </ion-item>
+            </ion-list>
+          
+           <!-- <select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
           required [(ngModel)]="selectedCOS_ID">
           <option selected disabled [value]="null">Select a Course of study</option>
           <option *ngFor="let cos of coursesOfStudy" [value]="cos.id">{{ cos.name }}</option>
-        </select>
+        </select>-->
 
         </form>
 

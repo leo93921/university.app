@@ -5,45 +5,37 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-  
-    <ion-title  >{{subjectName}} </ion-title>
-   
-   
+    <ion-title>{{subjectName}}</ion-title>
   </ion-navbar>
-
-
 </ion-header>
-
 
 <ion-content padding>
 
-    
-  <ion-card>
-
-    <ion-card-header>
-      You are rating: 
-    </ion-card-header>
-  
-    <ion-card-content>
-      {{secondField}} {{ dateS | date:'d MMM, HH:mm' }} - {{ dateE | date:'HH:mm' }}
-    </ion-card-content>
-  
-  </ion-card>
-
-
-    <ion-input type="number" class="form-control"  min="1" max="5" id="score" name="score" placeholder="5" [(ngModel)]="evaluation.score"
-      required></ion-input>
-
-      <br>
-      <ion-input type="text" class="form-control" id="note" name="note" placeholder="Your comment" [(ngModel)]="evaluation.note"
-        required> </ion-input>
-        <br>
-        <button ion-button (click)="saveEvaluation(evaluation)" >Send</button>
-
-   
-
-
+  <h3>Rating</h3>
+  <p>You are rating {{secondField}} {{ dateS | date:'d MMM, HH:mm' }} - {{ dateE | date:'HH:mm' }}</p>
+  <form #f="ngForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-label stacked>Value</ion-label>
+          <ion-input type="number" class="form-control" min="1" max="5" id="score" name="score" placeholder="Vote from 0 to 5" [(ngModel)]="evaluation.score"
+            required></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-label stacked>Note</ion-label>
+          <ion-input type="text" class="form-control" id="note" name="note" placeholder="Add a comment" [(ngModel)]="evaluation.note"
+            required> </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button (click)="saveEvaluation(evaluation)" block [disabled]="f.invalid">Send</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 
 </ion-content>

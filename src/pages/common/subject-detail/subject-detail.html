@@ -21,11 +21,13 @@
         <ion-row>
           <ion-col col-6>
             Professor
-            <br> {{ subject.professor.name }} {{ subject.professor.surname }}
+            <br>
+            <b>{{ subject.professor.name }} {{ subject.professor.surname }}</b>
           </ion-col>
           <ion-col col-6 text-right>
             CFU
-            <br> {{ subject.cfu }}
+            <br>
+            <b>{{ subject.cfu }}</b>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -33,15 +35,23 @@
   </ion-card>
 
   <ion-card>
-      <ion-card-header>
+      <ion-card-header ion-text color="primary">
         Lessons
       </ion-card-header>
       <ion-list>
-        <button ion-item *ngFor="let l of lessons; let index = index" (click)="selectLesson(l)">
-          <span class="text-bold">Lesson {{ index + 1 }}</span><br>
-          <small>{{ l.timeSlot.startTime | date:'d MMM, HH:mm' }} - {{ l.timeSlot.endTime | date:'HH:mm' }}</small>
+        <button class="lessons-buttons" ion-item *ngFor="let l of lessons; let index = index" (click)="selectLesson(l)">
+          <h2 class="text-bold">Lesson {{ index + 1 }}</h2>
+          <h3>{{ l.timeSlot.startTime | date:'d MMM, HH:mm' }} - {{ l.timeSlot.endTime | date:'HH:mm' }}</h3>
+          <ion-icon name="ios-arrow-forward-outline" item-end></ion-icon>
         </button>
       </ion-list>
+      <ion-grid *ngIf="lessons.length === 0">
+          <ion-row>
+            <ion-col col-12 text-center ion-text>
+              No lessons found.
+            </ion-col>
+          </ion-row>
+        </ion-grid>
     </ion-card>
 
 </ion-content>

@@ -5,81 +5,51 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Lesson Detail</ion-title>
+    <ion-title>{{lesson.subject.name}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
 
-
-<ion-content padding>
-  
-  
   <ion-card>
-    <ion-card-header>
-      {{lesson.subject.name}}
-    </ion-card-header>
-    <ion-card-content center>
-
-
-        <ion-grid>
-            <ion-row center>
-            
-              
-                
-                {{ lesson.timeSlot.startTime | date:'d MMM, HH:mm' }} - {{ lesson.timeSlot.endTime | date:'HH:mm' }}
-
-              
-                </ion-row><ion-row center>
-              
-                  <button ion-button  (click)="selectLesson(lesson)" >Rate this Lesson!</button>
-
-            
-          
-            </ion-row>
-          </ion-grid>
-
-
-
-</ion-card-content>
+    <ion-card-content>
+      <p>
+        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ lesson.timeSlot.startTime | date:'d MMM, HH:mm' }} - {{ lesson.timeSlot.endTime | date:'HH:mm' }}
+      </p>
+      <p>
+        <ion-icon ios="ios-pin" md="md-pin"></ion-icon> {{ lesson.classroom.name }}
+      </p>
+      </ion-card-content>
+      <button class="no-margin-bottom" ion-button (click)="selectLesson(lesson)" full>Rate this lesson</button>
   </ion-card>
 
+  <ion-card *ngIf="documents.length === 0">
+    <ion-card-content>
+      No documents avaiable for this lesson.
+    </ion-card-content>
+  </ion-card>
 
-  <ion-card  *ngIf="documents.length === 0" >
-
-
-  <ion-card-content>
-      No documents avaiable for this lesson
-  </ion-card-content>
-    
-    </ion-card>
-
-    
-
-  
-    <ion-card  *ngFor="let d of documents; let index = index" >
-
-        <ion-card-header>
-            <span class="text-bold">Name: {{d.name}}</span>
-        </ion-card-header>
-      
-
-        <ion-card-content >
-      
-            Description: {{d.note}}
-            <br>
-            Published on: {{d.publishDate | date:'d MMM, HH:mm'}}
-            <br>
-            <button ion-button (click)="downloadFile(d)">DOWNLOAD</button>
-            <br>
-            <button ion-button (click)="selectDocument(d)" >Rate this Document!</button>
-        </ion-card-content>
-      
-      </ion-card>
-
-
-
+  <ion-card *ngFor="let d of documents; let index = index">
+    <ion-card-header>
+      <span class="text-bold">{{d.name}}</span>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{d.note}}</p>
+      <p class="text-grey"><small>Published on {{d.publishDate | date:'d MMM, HH:mm'}}</small></p>
+    </ion-card-content>
+    <ion-row>
+        <ion-col>
+          <button ion-button clear large full (click)="downloadFile(d)">
+            <ion-icon name="ios-cloud-download" class="text-center"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button clear class="text-center" large full (click)="selectDocument(d)">
+            <ion-icon name="ios-text" class="text-center"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+  </ion-card>
 
 </ion-content>

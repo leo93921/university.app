@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Subject List</ion-title>
   </ion-navbar>
 
@@ -15,13 +18,14 @@
 
 <ion-content>
   <ion-list *ngIf="subjects.length !== 0">
-    <button ion-item *ngFor="let s of subjects" (click)="selectSubject(s)">
+    <button ion-item class="lessons-buttons" *ngFor="let s of subjects" (click)="selectSubject(s)">
       {{ s.name }}
+      <ion-icon name="ios-arrow-forward-outline" item-end></ion-icon>
     </button>
   </ion-list>
   <ion-grid *ngIf="subjects.length === 0">
     <ion-row>
-      <ion-col col-12 text-center >
+      <ion-col col-12 text-center>
         No subjects found.
       </ion-col>
     </ion-row>

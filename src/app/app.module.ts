@@ -38,6 +38,9 @@ import { ChatProvider } from '../providers/chat/chat';
 import { ExamProvider } from '../providers/exam/exam';
 import { DailyExamComponent } from '../components/daily-exam/daily-exam';
 
+import { File } from '@ionic-native/file';
+import { FileOpener } from '@ionic-native/file-opener';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCiSae0ApX5hNamm4wEFfd5FwE5k8iPvyk",
   authDomain: "university-be.firebaseio.com",
@@ -108,7 +111,9 @@ export const firebaseConfig = {
     ChatProvider,
     MessageProvider,
     CourseOfStudyProvider,
-    ExamProvider
+    ExamProvider,
+    File,
+    FileOpener
   ]
 })
 export class AppModule {}

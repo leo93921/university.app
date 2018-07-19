@@ -56,11 +56,15 @@ export class MyApp {
   }
 
   logout() {
-    forkJoin(
-      this.localStorage.removeItem('loggedUser'),
-      this.platform.is('cordova') ? this.fcm.logout() : of(null)
-    ).subscribe(() => {
-      this.nav.setRoot(HomePage)
-    });
+    this.localStorage.getItem('loggedUser').subscribe(user => {
+      const userCopy = JSON.parse(JSON.stringify(user));
+      debugger;
+      forkJoin(
+        this.platform.is('cordova') ? this.fcm.logout(userCopy) : of(null),
+        this.localStorage.removeItem('loggedUser')
+      ).subscribe(() => {
+        this.nav.setRoot(HomePage)
+      });
+    })
   }
 }

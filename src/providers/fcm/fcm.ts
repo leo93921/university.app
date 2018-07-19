@@ -6,7 +6,7 @@ import { User } from '../../models/User';
 import { Constants } from '../../constants';
 import { FCMTokenRegistration } from '../../models/fcm-token-registration';
 import { Observable } from 'rxjs/Observable';
-import { from } from 'rxjs';
+import { from, forkJoin } from 'rxjs';
 
 /*
   Generated class for the FcmProvider provider.
@@ -57,7 +57,10 @@ export class FcmProvider {
     return from(this.firebaseNative.subscribe(topicName));
   }
 
-  public logout() {
-    return from(this.firebaseNative.unregister());
+  public logout(user: User) {
+    return forkJoin(
+      from(this.firebaseNative.unregister()),
+      this.http.post<boolean>(`${this.END_POINT}/unsubscribe-fcm-token`, user)
+    );
   }
 }

@@ -40,15 +40,18 @@
       <p>{{d.note}}</p>
       <p class="text-grey"><small>Published on {{d.publishDate | date:'d MMM, HH:mm'}}</small></p>
     </ion-card-content>
+
     <ion-row>
         <ion-col>
-          <button ion-button clear large full (click)="downloadFile(d)">
-            <ion-icon name="ios-cloud-download" class="text-center"></ion-icon>
+          <button ion-button icon-start clear small (click)="downloadFile(d)">
+            <ion-icon name="ios-cloud-download"></ion-icon>
+            <div>Download</div>
           </button>
         </ion-col>
-        <ion-col>
-          <button ion-button clear class="text-center" large full (click)="selectDocument(d)">
-            <ion-icon name="ios-text" class="text-center"></ion-icon>
+        <ion-col text-right>
+          <button ion-button icon-start clear small (click)="selectDocument(d)">
+            <ion-icon name="ios-text"></ion-icon>
+            <div>Rate</div>
           </button>
         </ion-col>
       </ion-row>

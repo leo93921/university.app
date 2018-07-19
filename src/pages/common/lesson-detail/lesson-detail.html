@@ -13,15 +13,17 @@
 <ion-content>
 
   <ion-card>
+    <div>
+      <img id="map_canvas" />
+    </div>
     <ion-card-content>
-      <p>
-        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> {{ lesson.timeSlot.startTime | date:'d MMM, HH:mm' }} - {{ lesson.timeSlot.endTime | date:'HH:mm' }}
+      <ion-card-title>{{ lesson.subject.name }}</ion-card-title>
+      <p>The lesson starts at {{ lesson.timeSlot.startTime | date:'d MMM, HH:mm' }} and ends at {{ lesson.timeSlot.endTime | date:'HH:mm'
+        }}. It is in the classroom {{ lesson.classroom.name }}.
       </p>
-      <p>
-        <ion-icon ios="ios-pin" md="md-pin"></ion-icon> {{ lesson.classroom.name }}
-      </p>
-      </ion-card-content>
-      <button class="no-margin-bottom" ion-button (click)="selectLesson(lesson)" full>Rate this lesson</button>
+    </ion-card-content>
+
+    <button class="no-margin-bottom" ion-button (click)="selectLesson(lesson)" full>Rate this lesson</button>
   </ion-card>
 
   <ion-card *ngIf="documents.length === 0">

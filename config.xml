@@ -3,7 +3,7 @@
     <name>university_app</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.4:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -86,6 +86,12 @@
     <allow-navigation href="http://192.168.1.5:8100" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <allow-navigation href="http://192.168.1.4:8100" />
-    <engine name="android" spec="^7.0.0" />
     <plugin name="cordova-plugin-file-opener2" spec="https://github.com/JuanjoPP/cordova-plugin-file-opener2" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.3.7">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBo4AdtM152cE9cgabPCZ_7HzrsZqTDMbs" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyBo4AdtM152cE9cgabPCZ_7HzrsZqTDMbs" />
+        <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="26.1.0" />
+    </plugin>
+    <engine name="android" spec="^7.0.0" />
 </widget>

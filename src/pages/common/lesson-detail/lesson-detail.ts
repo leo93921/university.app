@@ -5,8 +5,11 @@ import { DocumentProvider } from '../../../providers/document/document';
 import { Document } from '../../../models/document';
 import { HttpResponse } from '@angular/common/http';
 import { RatePage } from '../../student/rate/rate';
+import { SeeRatePage } from '../../professor/see-rate/see-rate';
 import { File, FileEntry } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
+import { User } from '../../../models/User';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import {
   GoogleMaps,
   GoogleMap,
@@ -23,9 +26,12 @@ export class LessonDetailPage {
   lesson: Lesson = {} as Lesson;
   documents : Document[] = [];
   map: GoogleMap;
+  private loggedUser: User;
+private userType: String;
 
   constructor(
     public navCtrl: NavController,
+    private localStorage: LocalStorage,
     public navParams: NavParams,
     private documentProvider : DocumentProvider,
     private file: File,
@@ -35,6 +41,11 @@ export class LessonDetailPage {
     this.lesson = navParams.data;
     this.documentProvider.getDocumentsByLesson(this.lesson).subscribe(list => {
       this.documents = list;
+    });
+
+    this.localStorage.getItem('loggedUser').subscribe((user) => {
+      this.loggedUser = user;
+      this.userType = this.loggedUser.userType;
     });
   }
 
@@ -55,19 +66,34 @@ export class LessonDetailPage {
     }, error => console.log(error));
   }
 
-  selectDocument(document: Document) {
+  selectDocumentRate(document: Document) {
     this.navCtrl.push(RatePage, {
       body: document,
       type: 'document'
     });
   }
 
-  selectLesson(lesson: Lesson) {
+  selectLessonRate(lesson: Lesson) {
     this.navCtrl.push(RatePage, {
       body: lesson,
       type: 'lesson'
     });
   }
+
+  selectDocumentSeeRate(document: Document) {
+    this.navCtrl.push(SeeRatePage, {
+      body: document,
+      type: 'document'
+    });
+  }
+
+  selectLessonSeeRate(lesson: Lesson) {
+    this.navCtrl.push(SeeRatePage, {
+      body: lesson,
+      type: 'lesson'
+    });
+  }
+
 
   loadMap() {
       let mapOptions: GoogleMapOptions = {

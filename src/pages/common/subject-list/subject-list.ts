@@ -5,6 +5,7 @@ import { SubjectProvider } from '../../../providers/subject/subject';
 import { User } from '../../../models/User';
 import { Subject } from '../../../models/subject';
 import { SubjectDetailPage } from '../subject-detail/subject-detail';
+import { Constants } from '../../../constants';
 
 /**
  * Generated class for the SubjectListPage page.
@@ -22,6 +23,7 @@ import { SubjectDetailPage } from '../subject-detail/subject-detail';
 export class SubjectListPage {
 
   subjects: Subject[] = [];
+  private loggedUser: User;
 
   constructor(
     public navCtrl: NavController,
@@ -31,11 +33,25 @@ export class SubjectListPage {
   ) { }
 
   ionViewDidLoad() {
-    this.localStorage.getItem('loggedUser').subscribe((user: User) => {
-      this.subjectProvider.getAllByCourseOfStudy(user.courseOfStudy).subscribe(list => {
-        this.subjects = list;
-      })
+
+    this.localStorage.getItem('loggedUser').subscribe((user) => {
+      this.loggedUser = user;
+
+      if (this.loggedUser.userType === Constants.PROFESSOR_TYPE) {
+
+        this.subjectProvider.getByProfessor(user).subscribe(list => {
+          this.subjects = list;
+        })
+      } else {
+
+        this.subjectProvider.getAllByCourseOfStudy(user.courseOfStudy).subscribe(list => {
+          this.subjects = list;
+        })
+
+      }
+
     });
+
   }
 
   selectSubject(subject: Subject) {

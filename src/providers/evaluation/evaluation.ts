@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constants } from '../../constants';
 import { Evaluation } from '../../models/evaluation';
+import { Document } from '../../models/document';
+import { Lesson } from '../../models/lesson';
 
 /*
   Generated class for the EvaluationProvider provider.
@@ -20,6 +22,17 @@ export class EvaluationProvider {
 
   public saveEvaluation(evaluation: Evaluation): Observable<Evaluation>{
     return this.http.post<Evaluation>(`${this.END_POINT}`, evaluation);
+  }
+
+
+  public getEvaluationByDocument(document : Document) : Observable<Evaluation[]>
+  {
+    return this.http.post<Evaluation[]>(`${this.END_POINT}/get-by-document`, document);
+  }
+
+  public getEvaluationByLesson(lesson : Lesson) : Observable<Evaluation[]>
+  {
+    return this.http.post<Evaluation[]>(`${this.END_POINT}/get-by-lesson`, lesson);
   }
 
 }

@@ -24,6 +24,7 @@ import { LessonProvider } from '../providers/lesson/lesson';
 import { LessonDetailPage } from '../pages/common/lesson-detail/lesson-detail';
 import { DocumentProvider } from '../providers/document/document';
 import { RatePage } from '../pages/student/rate/rate';
+import { SeeRatePage } from '../pages/professor/see-rate/see-rate';
 import { EvaluationProvider } from '../providers/evaluation/evaluation';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { MessageProvider } from '../providers/message/message';
@@ -58,7 +59,7 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage,
+    SeeRatePage,
     ChatListPage,
     ChatUsersPage,
     ChatMessagesPage,
@@ -86,7 +87,7 @@ export const firebaseConfig = {
     SubjectListPage,
     SubjectDetailPage,
     LessonDetailPage,
-    RatePage,
+    SeeRatePage,
     ChatListPage,
     ChatUsersPage,
     ChatMessagesPage,

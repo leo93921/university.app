@@ -14,37 +14,32 @@
 
 
 <ion-content padding>
-  <p>You are seeing the ratings of {{secondField}} {{ dateS | date:'d MMM, HH:mm' }} - {{ dateE | date:'HH:mm' }}</p>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>Rating</ion-card-title>
+      <p>
+        You are seeing the ratings of {{secondField}} {{ dateS | date:'d MMM, HH:mm' }} - {{ dateE | date:'HH:mm' }}
+      </p>
+    </ion-card-content>
+  </ion-card>
 
   <ion-card *ngIf="evaluations.length === 0">
-
     <ion-card-content>
-No evaluations found.
+      No evaluations found.
     </ion-card-content>
   </ion-card>
 
-
   <ion-card *ngIf="evaluations.length !== 0">
-
     <ion-card-content>
-<b>Average is:</b> {{average}}
+      <ion-card-title>Ratings (avg. {{average}})</ion-card-title>
+      <ion-list>
+        <ion-item *ngFor="let e of evaluations; let index = index">
+          <h2>{{e.note}}</h2>
+          <p>Score: {{e.score}}</p>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="evaluations.length !== 0">
-
-  <ion-card-header>
-   <b>Details of rating</b> 
-  </ion-card-header>
-
-  </ion-card>
-<ion-card *ngFor="let e of evaluations; let index = index">
-
-
-  <ion-card-content>
-   <b>Score:</b> {{e.score}}
-   <br>
-   <b>Note:</b> {{e.note}}
-  </ion-card-content>
-</ion-card>
 
 </ion-content>

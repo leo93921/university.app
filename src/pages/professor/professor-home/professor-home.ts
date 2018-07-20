@@ -9,6 +9,8 @@ import { LessonFilter } from '../../../models/lesson-filter';
 import { TimeSlot } from '../../../models/time-slot';
 import { Lesson } from '../../../models/lesson';
 import { LessonProvider } from '../../../providers/lesson/lesson';
+import { NotificationHandler } from '../../../notification-handler/notification-handler';
+
 /**
  * Generated class for the ProfessorHomePage page.
  *
@@ -25,14 +27,19 @@ export class ProfessorHomePage {
 
   loggedUser: User = {} as User;
   lessons: Lesson[] = [];
+  notificationHandler: NotificationHandler;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
     private fcmProvider: FcmProvider,
     private toastController: ToastController,
     private localStorage: LocalStorage,
     private subjectProvider: SubjectProvider,
     private lessonProvider: LessonProvider,
-    private platform: Platform) {
+    private platform: Platform
+  ) {
+    this.notificationHandler = new NotificationHandler(platform, navCtrl);
   }
 
   ionViewDidLoad() {
@@ -45,12 +52,14 @@ export class ProfessorHomePage {
             // Subscribe to single notifications
             this.fcmProvider.listenToNotifications().pipe(
               tap(msg => this.createToastMessage(msg))
-            ).subscribe();
+            ).subscribe(msg => {
+              this.notificationHandler.handleNotification(msg);
+            });
 
             // Subscribe to all topics for each course of study
             this.subjectProvider.getByProfessor(this.loggedUser).subscribe(list => {
               list.forEach(cs => {
-                this.fcmProvider.subscribeToTopic(cs.name.replace(' ', '')).pipe(
+                this.fcmProvider.subscribeToTopic(cs.name.replace(/ /g, '')).pipe(
                   tap(msg => this.createToastMessage(msg))
                 ).subscribe();
               })

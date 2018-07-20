@@ -12,6 +12,8 @@ import { Lesson } from '../../../models/lesson';
 import { Exam } from '../../../models/exam';
 import { LessonProvider } from '../../../providers/lesson/lesson';
 import { ExamProvider } from '../../../providers/exam/exam';
+import { LessonDetailPage } from '../../common/lesson-detail/lesson-detail';
+import { NotificationHandler } from '../../../notification-handler/notification-handler';
 
 @IonicPage()
 @Component({
@@ -23,6 +25,7 @@ export class StudentHomePage {
   loggedUser: User = {} as User;
   lessons: Lesson[] = [];
   exams: Exam[] = [];
+  notificationHandler: NotificationHandler;
 
   constructor(
     public navCtrl: NavController,
@@ -34,7 +37,9 @@ export class StudentHomePage {
     private examProvider: ExamProvider,
     private lessonProvider: LessonProvider,
     private platform: Platform
-  ) { }
+  ) {
+    this.notificationHandler = new NotificationHandler(platform, navCtrl);
+  }
 
   ionViewDidLoad() {
       this.localStorage.getItem('loggedUser').subscribe((user: User) => {
@@ -45,13 +50,18 @@ export class StudentHomePage {
             this.fcmProvider.getToken(user).then(() => {
               // Subscribe to single notifications
               this.fcmProvider.listenToNotifications().pipe(
-                tap(msg => this.createToastMessage(msg))
-              ).subscribe();
+                tap(msg => {
+                  this.createToastMessage(msg);
+                  this.handleNotification(msg);
+                })
+              ).subscribe((msg) => {
+                this.notificationHandler.handleNotification(msg);
+              });
 
               // Subscribe to all topics for each course of study
               this.subjectProvider.getAllByCourseOfStudy(user.courseOfStudy).subscribe(list => {
                 list.forEach(cs => {
-                  this.fcmProvider.subscribeToTopic(cs.name.replace(' ', '')).pipe(
+                  this.fcmProvider.subscribeToTopic(cs.name.replace(/ /g, '')).pipe(
                     tap(msg => this.createToastMessage(msg))
                   ).subscribe();
                 })
@@ -67,6 +77,13 @@ export class StudentHomePage {
       duration: 3000
     });
     toast.present();
+  }
+
+  handleNotification(msg) {
+    if (msg.type === 'document') {
+      const lesson = msg.lesson;
+      this.navCtrl.push(LessonDetailPage, lesson);
+    }
   }
 
   initLessonFilter(): LessonFilter {

@@ -31,6 +31,7 @@ export class LessonDetailPage {
   private loggedUser: User;
   userType: String;
   documentMap: Map<number, boolean> = new Map();
+  lessonCheck: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -62,6 +63,20 @@ export class LessonDetailPage {
            })
          }
        });
+
+
+this.evaluationProvider.checkEvaluation(
+
+{
+  user: this.loggedUser,
+  lesson: this.lesson,
+  objectType: 'LESSON'
+}
+
+).pipe(take(1)).subscribe(val =>{this.lessonCheck = val;})
+
+
+
      });
   }
 

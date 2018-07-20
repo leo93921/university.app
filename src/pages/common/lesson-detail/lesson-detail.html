@@ -24,7 +24,7 @@
     </ion-card-content>
 
    
-    <button *ngIf="userType === 'STUDENT'" class="no-margin-bottom" ion-button (click)="selectLessonRate(lesson)" full>Rate this lesson</button>
+    <button *ngIf="userType === 'STUDENT' && (!lessonCheck)" class="no-margin-bottom" ion-button (click)="selectLessonRate(lesson)" full>Rate this lesson</button>
     <button *ngIf="userType === 'PROFESSOR'" class="no-margin-bottom" ion-button (click)="selectLessonSeeRate(lesson)" full>See ratings of this lesson</button>
   </ion-card>
 

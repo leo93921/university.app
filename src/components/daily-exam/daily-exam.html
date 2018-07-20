@@ -1,18 +1,16 @@
 <!-- Generated template for the DailyLessonComponent component -->
 <div>
-  <ion-list *ngIf="exams.length !== 0">
-    <button ion-item *ngFor="let e of exams" >
-      Exam: <br>
-        {{ e.subject.name }} <br>
-      {{ e.classroom.name }}<br>
-      {{ e.description }}<br>
 
-
-    {{ e.timeslot.startTime | date:'d MMM, HH:mm' }} - {{ e.timeslot.endTime | date:'HH:mm' }} 
-    </button>
+  <ion-list>
+    <ion-card *ngFor="let e of exams">
+      <ion-card-content>
+        <ion-card-title>Exam: {{ e.subject.name }}</ion-card-title>
+        <p>The exam starts at {{ e.timeslot.startTime | date:'d MMM, HH:mm' }} and ends at {{ e.timeslot.endTime | date:'HH:mm' }}.
+          It is in the classroom {{ e.classroom.name }}.
+        </p>
+        <p><small>{{ e.description }}</small></p>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
-
-
-
 
 </div>

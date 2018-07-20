@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { User } from '../models/User';
+import { Constants } from '../constants';
 
 import { HomePage } from '../pages/home/home';
 import { StudentHomePage } from '../pages/student/student-home/student-home';
@@ -11,6 +13,7 @@ import { forkJoin } from '../../node_modules/rxjs/observable/forkJoin';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { ChatListPage } from '../pages/common/chat-list/chat-list';
 import { of } from 'rxjs';
+import { ProfessorHomePage } from '../pages/professor/professor-home/professor-home';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,6 +21,7 @@ import { of } from 'rxjs';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+  private loggedUser: User;
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
@@ -31,12 +35,38 @@ export class MyApp {
   ) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: StudentHomePage },
-      { title: 'Subject List', component: SubjectListPage },
-      { title: 'Chat', component: ChatListPage }
-    ];
+    this.localStorage.getItem('loggedUser').subscribe((user) => {
+      this.loggedUser = user;
+      if (this.loggedUser != null){
+      if (this.loggedUser.userType == Constants.PROFESSOR_TYPE)
+      {
+        this.rootPage = ProfessorHomePage;
+      }
+      if (this.loggedUser.userType == Constants.STUDENT_TYPE)
+      {
+        this.rootPage = StudentHomePage;
+      }
+    
+      else
+      {
+        this.rootPage = HomePage;
+      }
+    }
+
+ // used for an example of ngFor and navigation
+ this.pages = [
+  { title: 'Home', component: this.rootPage },
+  { title: 'Subject List', component: SubjectListPage },
+  { title: 'Chat', component: ChatListPage }
+];
+
+
+    });
+
+
+
+
+   
 
   }
 

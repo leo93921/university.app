@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController   } from 'ionic-angular';
 import { Lesson } from '../../../models/lesson';
 import { Document } from '../../../models/document';
 import { EvaluationProvider } from '../../../providers/evaluation/evaluation';
-import { MessageProvider } from '../../../providers/message/message';
 import { Evaluation } from '../../../models/evaluation';
 import { User } from '../../../models/User';
 import { LocalStorage } from '../../../../node_modules/@ngx-pwa/local-storage';
@@ -31,10 +30,11 @@ export class RatePage {
   dateE: number;
 
   constructor(public navCtrl: NavController, 
+    private toastController: ToastController,
     public navParams: NavParams,
      private evaluationProvider : EvaluationProvider,
-     private localStorage: LocalStorage,
-    private messageProvider: MessageProvider
+     private localStorage: LocalStorage
+  
     ) {
 
    // this.evaluation.sender = ;
@@ -82,14 +82,21 @@ if ( navParams.data.type ===  'document') {
     this.evaluation.sender = this.loggedUser;
     this.evaluationProvider.saveEvaluation(this.evaluation).subscribe(evaluation => {
       
-      this.messageProvider.showSuccess('Evaluation successfully');
+      
+      this.createToastMessage("Thanks for your evaluation");
+      this.navCtrl.pop();
      
     }, error => {
-      this.messageProvider.showAlert({
-        message: 'Something went wrong. Try again later',
-        type: 'danger'
-      });
+      this.createToastMessage("Something went wrong, try again later");
     });
+  }
+
+  createToastMessage(msg) {
+    const toast = this.toastController.create({
+      message: msg.body,
+      duration: 3000
+    });
+    toast.present();
   }
 
 

@@ -1,12 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from '../../constants';
-import { LessonFilter } from '../../models/lesson-filter';
 import { ExamFilter } from '../../models/exam-filter';
 import { Observable } from 'rxjs/Observable';
-import { Lesson } from '../../models/lesson';
 import { Exam } from '../../models/exam';
-import { Subject } from '../../models/subject';
 
 /*
   Generated class for the ExamProvider provider.
@@ -21,7 +18,6 @@ export class ExamProvider {
 
   constructor(public http: HttpClient) { }
 
-
   public dailyExam(filter: ExamFilter): Observable<Exam[]> {
     return this.http.post<Exam[]>(`${this.END_POINT}/daily`, filter);
   }
@@ -30,5 +26,3 @@ export class ExamProvider {
   }
 
 }
-
-

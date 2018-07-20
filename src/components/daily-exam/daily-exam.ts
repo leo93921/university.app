@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Exam } from '../../models/exam';
 
 /**
@@ -13,13 +13,8 @@ import { Exam } from '../../models/exam';
 })
 export class DailyExamComponent {
 
-  text: string;
-
   @Input() exams: Exam[] = [];
 
-  constructor() {
-    console.log('Hello DailyExamComponent Component');
-    this.text = 'Hello World';
-  }
+  constructor() { }
 
 }

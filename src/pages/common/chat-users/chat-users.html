@@ -25,8 +25,8 @@
   </ion-item-group>
   <ion-item-group>
     <ion-item-divider color="light">Professors</ion-item-divider>
-    <button ion-item *ngFor="let s of subjectList" (click)="sendMessageToUser(s.professor)">
-      {{ s.professor.name }} {{ s.professor.surname }}
+    <button ion-item *ngFor="let professor of professors" (click)="sendMessageToUser(professor)">
+      {{ professor.name }} {{ professor.surname }}
     </button>
     <ion-item *ngIf="subjectList.length === 0" text-center>
       <small>No professors found.</small>

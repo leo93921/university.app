@@ -20,7 +20,7 @@ export class ChatUsersPage {
   subjectList: Subject[] = [];
   students: User[] = [];
   subjectSubscription: any;
-
+  professors: User[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -41,6 +41,13 @@ export class ChatUsersPage {
       }
       this.subjectSubscription = subjSubObject.pipe(first()).subscribe(list => {
         this.subjectList = list;
+        const professorsMap: Map<number, User> = new Map();
+        this.subjectList.forEach(subject => {
+          if (!professorsMap.has(subject.professor.id)) {
+            professorsMap.set(subject.professor.id, subject.professor);
+          }
+        })
+        this.professors = Array.from(professorsMap.values())
         const studentsMap: Map<number, User> = new Map();
         const subs = [];
         if (user.userType === Constants.PROFESSOR_TYPE) {
@@ -57,13 +64,20 @@ export class ChatUsersPage {
                 }
               }
             },
-            complete: () => {this.students = Array.from(studentsMap.values())}
+            complete: () => {
+              this.students = Array.from(studentsMap.values())
+            }
           })
         }
       });
       if (user.userType !== Constants.PROFESSOR_TYPE) {
         this.userProvider.getStudentsByCourseOfStudy(user.courseOfStudy).subscribe(list => {
-          this.students = list;
+          for (let s of list) {
+            // Add all students, but not myself
+            if (s.id !== user.id) {
+              this.students.push(s);
+            }
+          }
         });
       }
     })

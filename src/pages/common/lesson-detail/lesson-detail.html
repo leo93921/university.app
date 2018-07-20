@@ -51,7 +51,7 @@
           </button>
         </ion-col>
         <ion-col text-right>
-          <button *ngIf="userType === 'STUDENT'" ion-button icon-start clear small (click)="selectDocumentRate(d)">
+          <button *ngIf="userType === 'STUDENT' && (!documentMap.get(d.id))" ion-button icon-start clear small (click)="selectDocumentRate(d)">
             <ion-icon name="ios-text"></ion-icon>
             <div>Rate</div>
           </button>

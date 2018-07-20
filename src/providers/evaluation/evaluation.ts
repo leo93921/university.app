@@ -5,6 +5,7 @@ import { Constants } from '../../constants';
 import { Evaluation } from '../../models/evaluation';
 import { Document } from '../../models/document';
 import { Lesson } from '../../models/lesson';
+import { EvaluationFilter } from '../../models/evaluation-filter';
 
 /*
   Generated class for the EvaluationProvider provider.
@@ -34,6 +35,13 @@ export class EvaluationProvider {
   {
     return this.http.post<Evaluation[]>(`${this.END_POINT}/get-by-lesson`, lesson);
   }
+
+  public checkEvaluation(filter: EvaluationFilter) : Observable<boolean>
+  {
+    return this.http.post<boolean>(`${this.END_POINT}/check`, filter);
+  }
+
+
 
 }
 

@@ -15,6 +15,8 @@ import {
   GoogleMap,
   GoogleMapOptions
 } from '@ionic-native/google-maps';
+import { take } from '../../../../node_modules/rxjs/operators';
+import { EvaluationProvider } from '../../../providers/evaluation/evaluation';
 
 @IonicPage()
 @Component({
@@ -27,7 +29,8 @@ export class LessonDetailPage {
   documents : Document[] = [];
   map: GoogleMap;
   private loggedUser: User;
-private userType: String;
+  userType: String;
+  documentMap: Map<number, boolean> = new Map();
 
   constructor(
     public navCtrl: NavController,
@@ -36,17 +39,30 @@ private userType: String;
     private documentProvider : DocumentProvider,
     private file: File,
     private fileOpener: FileOpener,
-    private platform: Platform
+    private platform: Platform,
+    private evaluationProvider: EvaluationProvider
   ) {
-    this.lesson = navParams.data;
-    this.documentProvider.getDocumentsByLesson(this.lesson).subscribe(list => {
-      this.documents = list;
-    });
+  this.lesson = navParams.data;
+  }
 
+  ionViewWillEnter() {
     this.localStorage.getItem('loggedUser').subscribe((user) => {
-      this.loggedUser = user;
-      this.userType = this.loggedUser.userType;
-    });
+       this.loggedUser = user;
+       this.userType = this.loggedUser.userType;
+ 
+       this.documentProvider.getDocumentsByLesson(this.lesson).pipe(take(1)).subscribe(list => {
+         this.documents = list;
+         for (let d of this.documents) {
+           this.evaluationProvider.checkEvaluation({
+             user: this.loggedUser,
+             document: d,
+             objectType: 'DOCUMENT',
+           }).pipe(take(1)).subscribe(val => {
+             this.documentMap.set(d.id, val);
+           })
+         }
+       });
+     });
   }
 
   ionViewDidLoad() {

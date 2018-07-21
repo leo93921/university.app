@@ -93,7 +93,7 @@ if ( navParams.data.type ===  'document') {
 
   createToastMessage(msg) {
     const toast = this.toastController.create({
-      message: msg.body,
+      message: msg,
       duration: 3000
     });
     toast.present();

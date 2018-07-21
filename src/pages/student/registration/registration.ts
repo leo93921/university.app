@@ -54,7 +54,7 @@ export class RegistrationPage {
 
   createToastMessage(msg) {
     const toast = this.toastController.create({
-      message: msg.body,
+      message: msg,
       duration: 3000
     });
     toast.present();

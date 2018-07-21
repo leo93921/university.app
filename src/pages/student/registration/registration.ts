@@ -21,36 +21,27 @@ import { HomePage } from '../../home/home';
 export class RegistrationPage {
   student: User = {} as User;
 
-
   selectedCOS_ID = null;
   coursesOfStudy: CourseOfStudy[] = [];
   selectedCourseOfStudy: CourseOfStudy;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-      private toastController: ToastController,
-      private userProvider: UserProvider,
-  private courseOfStudyProvider: CourseOfStudyProvider) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private toastController: ToastController,
+    private userProvider: UserProvider,
+    private courseOfStudyProvider: CourseOfStudyProvider
+  ) { }
 
   ionViewDidLoad() {
-
     this.courseOfStudyProvider.getAll().subscribe(list => {
       this.coursesOfStudy = list;
     });
-
-    console.log('ionViewDidLoad RegistrationPage');
-  }
-
-
-  selectCourseOfStudy(ID: number) {
-    this.selectedCourseOfStudy = this.coursesOfStudy.find(cos => cos.id === ID);
-
   }
 
   goToLogin(){
     this.navCtrl.push(HomePage)
   }
-
 
   createToastMessage(msg) {
     const toast = this.toastController.create({
@@ -63,12 +54,13 @@ export class RegistrationPage {
 
   saveStudent() {
     this.student.userType = "STUDENT";
-    this.student.courseOfStudy = this.selectedCourseOfStudy;
+    this.student.courseOfStudy = this.coursesOfStudy.find(item => item.id === this.selectedCOS_ID);
+
     this.userProvider.registerUser(this.student).subscribe(user => {
-     
+
      this.createToastMessage("Student enrolled. You can now login");
       this.goToLogin();
-      
+
     }, error => {
       this.createToastMessage("Something went wrong");
     });

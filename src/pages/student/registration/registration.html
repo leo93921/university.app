@@ -1,9 +1,3 @@
-<!--
-  Generated template for the RegistrationPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,58 +8,29 @@
 
 
 <ion-content padding>
-
-    <form novalidate #form="ngForm">
-    Name
-                <ion-input ion-input type="text"  id="name" name="name" placeholder="Name" [(ngModel)]="student.name"
-                  required></ion-input> <br><br> 
-             Surname
-                <ion-input type="text"  id="surname" name="surname" placeholder="Surname" [(ngModel)]="student.surname"
-                  required></ion-input>
-              <br><br>Email
-                    <ion-input type="email"  id="email" name="email" placeholder="Email" [(ngModel)]="student.email"
-                      required></ion-input>
-                  <br><br>Password
-                    <ion-input type="password"  id="password" name="password" placeholder="Password" [(ngModel)]="student.password"
-                      required></ion-input>
-                 
-      </form>
-<br><br>
-      <form novalidate>
-     Course of study
-   
-           <!-- <ion-select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
-              required [(ngModel)]="selectedCOS_ID">
-              <ion-option selected disabled [value]="null">Select a Course of study</ion-option>
-              <ion-option *ngFor="let cos of coursesOfStudy" [value]="cos.id">{{ cos.name }}</ion-option>
-            </ion-select>-->
-
-
-            <ion-list>
-              <ion-item>
-                
-                <ion-select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
-                required [(ngModel)]="selectedCOS_ID">
-                <ion-option selected disabled [value]="null">Select a Course of study</ion-option>
-                <ion-option *ngFor="let cos of coursesOfStudy" [value]="cos.id">{{ cos.name }}</ion-option>
-              </ion-select>
-              </ion-item>
-            </ion-list>
-          
-           <!-- <select  id="course-of-study" name="course-of-study" (change)="selectCourseOfStudy(+$event.target.value)"
-          required [(ngModel)]="selectedCOS_ID">
-          <option selected disabled [value]="null">Select a Course of study</option>
-          <option *ngFor="let cos of coursesOfStudy" [value]="cos.id">{{ cos.name }}</option>
-        </select>-->
-
-        </form>
-
-        <br>
-
-      <button ion-button [disabled]="form.invalid" type="button"  data-dismiss="modal" (click)="saveStudent()">Save</button>
-
-        <br>
-        <br>
-      <button ion-button (click)="goToLogin()">Go back to Login Page</button>
-
+  <form #form="ngForm" novalidate>
+    <ion-item>
+      <ion-label stacked>Name</ion-label>
+      <ion-input type="text" id="name" name="name" placeholder="Name" [(ngModel)]="student.name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Surname</ion-label>
+      <ion-input type="text" id="surname" name="surname" placeholder="Surname" [(ngModel)]="student.surname" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="email" id="email" name="email" placeholder="Email" [(ngModel)]="student.email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input type="password" id="password" name="password" placeholder="Password" [(ngModel)]="student.password" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Course of study</ion-label>
+      <ion-select id="course-of-study" name="course-of-study" required [(ngModel)]="selectedCOS_ID">
+        <ion-option *ngFor="let cos of coursesOfStudy" [value]="cos.id">{{ cos.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-button block [disabled]="form.invalid" type="button" data-dismiss="modal" (click)="saveStudent()">Save</button>
+  </form>
 </ion-content>

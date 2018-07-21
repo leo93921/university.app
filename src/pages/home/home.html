@@ -20,9 +20,8 @@
 
     <div padding>
       <button ion-button block type="submit" [disabled]="f.invalid">Login</button>
+      <button ion-button block type="button" color="light" (click)="goToRegistration()">Register</button>
     </div>
   </form>
-
-  <button ion-button (click)="goToRegistration()">Register</button>
 
 </ion-content>

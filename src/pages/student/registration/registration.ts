@@ -62,7 +62,7 @@ export class RegistrationPage {
       this.goToLogin();
 
     }, error => {
-      this.createToastMessage("Something went wrong");
+      this.createToastMessage("The student is already registered.");
     });
   }
 

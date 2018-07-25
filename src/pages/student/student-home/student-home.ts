@@ -90,7 +90,7 @@ export class StudentHomePage {
     const start: Date = new Date();
     start.setHours(0);
     start.setMinutes(0);
-    start.setTime(start.getTime() - (1 * 24 * 60 * 60 * 1000));
+    start.setTime(start.getTime() );
 
     const end: Date = new Date();
     end.setHours(0);
@@ -110,7 +110,7 @@ export class StudentHomePage {
     const start: Date = new Date();
     start.setHours(0);
     start.setMinutes(0);
-    start.setTime(start.getTime() - (1 * 24 * 60 * 60 * 1000));
+    start.setTime(start.getTime() );
 
     const end: Date = new Date();
     end.setHours(0);
